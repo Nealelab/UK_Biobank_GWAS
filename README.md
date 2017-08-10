@@ -262,7 +262,7 @@ This allows us to take advantage of large cluster computing and parallel process
 
  #### Scripts associated with each step in the workflow above:
    1) `1_merge_mfi.sh`
-   2) ...
+   2) `2_fam_sqc_merge.R`
    3) `3_make_sample_qc_table.py`
    4) `4_build_pipelines.py`
    5) `5_make_variant_annotation_vds.py`
