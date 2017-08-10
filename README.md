@@ -233,32 +233,32 @@ This allows us to take advantage of large cluster computing and parallel process
     * spark.memory.storageFraction=0.5,spark.memory.fraction=0.4,spark.broadcast.blockSize=128m,spark.dynamicAllocation.enabled=false,spark.executor.memory=38g,spark.executor.cores=8
 
 ### Workflow for running associations in Hail for phenotypes across multiple applications:
-   1)  Merge chromosome-specific `ukb_mfi_chr*_v2.txt` files into one `ukb_mfi_v2.tsv` file with a chromosome field
-   2)  Merge `ukb_sqc_v2.txt` sample QC file with application-specific sample IDs using application-specific .fam files
-   3)  Create application-specific Hail keytables with application-specific sample ID, inferred sex (from `ukb_sqc_v2.txt`) and the first 10 PCs (also from `ukb_sqc_v2.txt`), subset to the set of 337,199 samples outlined above
-   4)  Build application-specific 'pipelines', where each pipeline is defined by a Hail keytable with (for the subset of 337,199 samples):
-     * application-specific sample ID
-     * inferred sex
-     * PCs 1-10
-     * A block of phenotypes capable of being run through linreg3 in one pass of reading in BGEN -> writing out results keytable
-   5)  Create a sites-only VDS for all 92,693,895 sites in the imputed data with:
-     * rsid
-     * info score (from `ukb_mfi_v2.tsv`)
-     * flag indicating if site is in HRC 1.1 release (`HRC.r1-1.GRCh37.wgs.mac5.sites.tab` file from http://www.haplotype-reference-consortium.org/site)
-     * variant QC metrics from Hail's `variant_qc()` method, calculated on the subset of 337,199 samples
-   6)  Create a filtered sites-only VDS with 10,894,596 variants, that satisfy the criteria:
-     * HRC site
-     * info score > 0.8
-     * 0.001 < AF < 0.999
-     * pHWE > 1e-10
-     * callRate > 0.95
-   7)  Run associations using linreg3, where for each pipeline (see step 4) in each application, we:
-     * Read in the BGENs
-     * Use the filtered sites-only VDS created in step (6) to filter variants
-     * Annotate samples with the pipeline-specific keytable
-     * Call the linreg3 command once for each group of phenotypes in the pipeline with the same missingness structure
-     * Write out association results to a Hail keytable
-   8)  Export a separate tsv results file (described below) and LDSC summary stat file for each phenotype in each pipelines across all applications
+   1) Merge chromosome-specific `ukb_mfi_chr*_v2.txt` files into one `ukb_mfi_v2.tsv` file with a chromosome field
+   2) Merge `ukb_sqc_v2.txt` sample QC file with application-specific sample IDs using application-specific .fam files
+   3) Create application-specific Hail keytables with application-specific sample ID, inferred sex (from `ukb_sqc_v2.txt`) and the first 10 PCs (also from `ukb_sqc_v2.txt`), subset to the set of 337,199 samples outlined above
+   4) Build application-specific 'pipelines', where each pipeline is defined by a Hail keytable with (for the subset of 337,199 samples):
+      * application-specific sample ID
+      * inferred sex
+      * PCs 1-10
+      * A block of phenotypes capable of being run through linreg3 in one pass of reading in BGEN -> writing out results keytable
+   5) Create a sites-only VDS for all 92,693,895 sites in the imputed data with:
+      * rsid
+      * info score (from `ukb_mfi_v2.tsv`)
+      * flag indicating if site is in HRC 1.1 release (`HRC.r1-1.GRCh37.wgs.mac5.sites.tab` file from http://www.haplotype-reference-consortium.org/site)
+      * variant QC metrics from Hail's `variant_qc()` method, calculated on the subset of 337,199 samples
+   6) Create a filtered sites-only VDS with 10,894,596 variants, that satisfy the criteria:
+      * HRC site
+      * info score > 0.8
+      * 0.001 < AF < 0.999
+      * pHWE > 1e-10
+      * callRate > 0.95
+   7) Run associations using linreg3, where for each pipeline (see step 4) in each application, we:
+      * Read in the BGENs
+      * Use the filtered sites-only VDS created in step (6) to filter variants
+      * Annotate samples with the pipeline-specific keytable
+      * Call the linreg3 command once for each group of phenotypes in the pipeline with the same missingness structure
+      * Write out association results to a Hail keytable
+   8) Export a separate tsv results file (described below) and LDSC summary stat file for each phenotype in each pipelines across all applications
 
  #### Scripts associated with each step in the workflow above:
    1) `1_merge_mfi.sh`
