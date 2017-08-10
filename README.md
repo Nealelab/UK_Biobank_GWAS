@@ -9,7 +9,7 @@
   * [Phenotype to Genotype linking](#phenotype-genotype-linking)
 * [Sample and Variant QC](#sample-and-variant-qc)
   * [Sample QC](#sample-qc)
-  * [Variant QC](#variant-qc)
+  * [Genotype QC](#variant-qc)
 * [Association in Hail](#hail-association)
   * [Association Model](#association-model)
 * [Summary stat output](#summary-stat-output)
@@ -22,7 +22,7 @@
  * Use the same sample and variant QC across all phenotypes
  * Run SNP association on UKBB imputed dosage BGEN files using hail on the google cloud platform
  * Provide per-SNP summary stats for all approved phenotypes
- * GWAS Results available for viewing and download via https://biobankengine.stanford.edu/search# (run by the Rivas Lab at Stanford)
+ * GWAS Results available for viewing and download via https://biobankengine.stanford.edu
 
 
 ## Files
@@ -80,8 +80,8 @@ We can only apologise that this error was not identified during the QA review an
     * [PHESANT phenotype curation strategy](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf)
 
 ### Phenotype output
-  * PHESANT ukb[XXXX]_output.tsv = full phenotype file with rows=sample ID and columns=phenotype ID
-  * Summary file: ukb[XXXX]_phenosummary_final.tsv
+  * Output file: **PHESANT ukb[XXXX]_output.tsv** (full phenotype file with rows=sample ID and columns=phenotype ID)
+  * Summary file: **ukb[XXXX]_phenosummary_final.tsv**
     * row number - numeric field matching UK Biobank data showcase field
     * Field - short description of phenotype
     * N.non.missing - number of non-missing QC positive samples
@@ -93,9 +93,9 @@ We can only apologise that this error was not identified during the QA review an
     * PHESANT.reassignments - changes to phenotype values by PHESANT
   * Example phenosummary_final.tsv file
 ```
-                             Field N.non.missing N.missing N.cases N.controls Notes                       PHESANT.notes                                            PHESANT.reassignments
-46       Hand grip strength (left)        335821      1378      NA         NA Left grip strength          46_0|| INTEGER || CONTINUOUS || IRNT ||                  <NA>
-47      Hand grip strength (right)        335842      1357      NA         NA Right grip strength         47_0|| INTEGER || CONTINUOUS || IRNT ||                  <NA>
+                             Field N.non.missing N.missing N.cases N.controls Notes                       PHESANT.notes                                                                         PHESANT.reassignments
+46       Hand grip strength (left)        335821      1378      NA         NA Left grip strength                                       46_0|| INTEGER || CONTINUOUS || IRNT ||                  <NA>
+47      Hand grip strength (right)        335842      1357      NA         NA Right grip strength                                       47_0|| INTEGER || CONTINUOUS || IRNT ||                  <NA>
 20116_1   Smoking status: Previous        336024      1175  118419     217605 current/past smoking status 20116_0 || CAT-SINGLE || CAT-SINGLE-BINARY-VAR: 1  || Inc(>=10): 1(173099) ||                  <NA>
 ```
 
@@ -191,9 +191,9 @@ QC positive sample subset (n = 337199):
 - in HRC imputation: 39,131,578
 - w/ pHWE > 1e-10: 92,471,744
 - w/ call rate > 95%: 92,693,895
-- w/ 0.001 < MAF < 0.999: 16,047,295
+- w/ 0.001 < MAF < 0.999: 16,047,294
 - w/ INFO score > 0.8: 29,447,617
-- w/ all of above: 10,894,597
+- w/ all of above: 10,894,596
 ```
 
 ## Association in Hail
@@ -202,7 +202,7 @@ SNP association is performed on UKBB imputed dosage BGEN files using hail on a g
 
 * [Hail](https://hail.is/) scalable genetic analyses
 * [Google Cloud Platform](https://cloud.google.com/) cluster computation and data storage
-* [cloudtools](https://github.com/Nealelab/cloudtools) script submission to compute clusters
+* [Cloud Tools](https://github.com/Nealelab/cloudtools) script submission to compute clusters
 
 This allows us to take advantage of large cluster computing and parallel processing via Apache Spark
 
@@ -270,5 +270,4 @@ variant		rsid		nCompleteSamplesAC	ytx		beta		se		tstat		pval
 5:43888690:C:G	rs147555725	953	5.87843e+00	9.80000e+00	1.98330e-01	2.11226e-01	9.38946e-01	3.48000e-01
 5:43888838:G:C	rs13185925	953	7.21765e+01	1.04306e+02	-2.46341e-02	6.00665e-02	-4.10113e-01	6.81816e-01
 ```
-
 
