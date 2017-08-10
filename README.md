@@ -93,12 +93,10 @@ We can only apologise that this error was not identified during the QA review an
     * PHESANT.reassignments - changes to phenotype values by PHESANT
   * Example phenosummary_final.tsv file
 ```
-	Field						N.non.missingN.missingN.cases
-	N.controls		Notes		PHESANT.notes		PHESANT.reassignments
-46	Hand grip strength (left)	335821	1378	NA	NA	Left grip strength	46_0|| INTEGER || CONTINUOUS || IRNT ||	NA
-47	Hand grip strength (right)	335842	1357	NA	NA	Right grip strength	47_0|| INTEGER || CONTINUOUS || IRNT ||	NA
-48	Waist circumference	336639	560	NA	NA	Waist circumference	48_0|| CONTINUOUS MAIN || CONTINUOUS || IRNT ||	NA
-49	Hip circumference	336601	598	NA	NA	Hip circumference	49_0|| CONTINUOUS MAIN || CONTINUOUS || IRNT ||	NA
+                             Field N.non.missing N.missing N.cases N.controls Notes                       PHESANT.notes                                            PHESANT.reassignments
+46       Hand grip strength (left)        335821      1378      NA         NA Left grip strength          46_0|| INTEGER || CONTINUOUS || IRNT ||                  <NA>
+47      Hand grip strength (right)        335842      1357      NA         NA Right grip strength         47_0|| INTEGER || CONTINUOUS || IRNT ||                  <NA>
+20116_1   Smoking status: Previous        336024      1175  118419     217605 current/past smoking status 20116_0 || CAT-SINGLE || CAT-SINGLE-BINARY-VAR: 1  || Inc(>=10): 1(173099) ||                  <NA>
 ```
 
 ### Phenotype to Genotype linking
