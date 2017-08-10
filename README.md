@@ -6,7 +6,7 @@
 * [UK Biobank updates](#updates)
 * [Phenotypes and applications](#phenotypes-and-applications)
   * [Phenotype output](#phenotype-output)
-  * [Phenotype / Genotype linking](#phenotype-genotype-linking)
+  * [Phenotype to Genotype linking](#phenotype-genotype-linking)
 * [Sample and Variant QC](#sample-and-variant-qc)
   * [Sample QC](#sample-qc)
   * [Variant QC](#variant-qc)
@@ -99,7 +99,7 @@ Field		N.non.missing		N.missing		N.cases	N.controls		Notes		PHESANT.notes		PHESA
 49	Hip circumference	336601	598	NA	NA	Hip circumference	49_0|| CONTINUOUS MAIN || CONTINUOUS || IRNT ||	NA
 ```
 
-### Phenotype / Genotype linking
+### Phenotype to Genotype linking
   * The main link files from application to UK Biobank imputed dataset are the **.fam** and **.sample** file
   * Both files have the same IDs
   	* The .fam file is ordered the same way as the ukb_sqc_v2.txt file
@@ -116,14 +116,14 @@ Field		N.non.missing		N.missing		N.cases	N.controls		Notes		PHESANT.notes		PHESA
   * putative.sex.chromosome.aneuploidy==0
 
 **Additional QC parameters**
-  * Samples withdrawn = 8 
+  * Samples withdrawn un UK Biobank update = 8 
   * Samples redacted = 3 ([-3,-2,-1] in the sample ID) 
 
-Samples removed from QC file = 151180
-Samples retained in QC file = 337199
-NOTE: all samples retained are in the .bgen files
-
- * The ukb_sqc_v2.txt file has more samples than the .bgen files, but the same number of samples as the application specific .sample file
+**Pre/post QC sample counts**
+  * Samples removed from QC file = 151180
+  * Samples retained in QC file = 337199
+  * NOTE: all samples retained are in the .bgen files
+  * NOTE: The ukb_sqc_v2.txt file has more samples than the .bgen files, but the same number of samples as the application specific .sample file
 
 **Description of inclusion parameters:**
 
@@ -175,10 +175,10 @@ Samples remaining: 337199
 
 ### Genotype QC
 
-**Primary genotype QC parameters for inclusion to GWAS from ukb_sqc_v2.txt file:**
+**Primary genotype QC parameters for inclusion to GWAS from ukb_sqc_v2.txt file**
   * SNPs present in HRC imputation file: `../imputed/resources/HRC/HRC.r1-1.GRCh37.wgs.mac5.sites.tab`
   * UKBB pHWE > 1e-10
-  * UKBB callRate > 0.95
+  * UKBB call rate > 0.95
   * UKBB INFO score > 0.8
   * QC positive Alternate Allele Frequency  (0.001 > AF < 0.999 in 337199 QC positive samples)
   * NOTE: MAF and INFO score available in per chromosome files: ukb_mfi_chr*_v2.txt
@@ -224,7 +224,8 @@ This allows us to take advantage of large cluster computing and parallel process
     6) Run linreg3
     7) Export summary stats (detailed below)  	   
 ```
- * Examples scripts are listed here
+
+ * Examples scripts are listed here:
   * [ukb1859_map_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_map_results.py)
   * [ukb1859_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_build_pipelines.py)
   * [ukb1859_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_linreg3.py)
@@ -233,15 +234,15 @@ This allows us to take advantage of large cluster computing and parallel process
 ## Summary stat output
 
 **QCed SNP information file**
-    * variant (hg19) [CHROM:POS:REF:ALT]
-    * rsid
-    * info (UKBB INFO score)
-    * AF (QC positive alternate allele frequency)
-    * pHWE
-    * callRate
-  * Example SNP information: 
+  * variant (hg19) [CHROM:POS:REF:ALT]
+  * rsid
+  * info (UKBB INFO score)
+  * AF (QC positive alternate allele frequency)
+  * pHWE
+  * callRate
+ * Example SNP information: 
 ```	
-variant		rsid		info		AF		pHWE	callRate
+variant		rsid		info		AF		pHWE		callRate
 10:61334:G:A	rs183305313	8.46690e-01	4.82208e-03	4.77873e-03	1.00000e+00
 10:69083:C:T	rs35418599	8.01306e-01	7.77212e-01	7.74927e-01	9.99961e-01
 10:90127:C:T	rs185642176	9.84897e-01	8.62740e-02	2.77123e-01	1.00000e+00
@@ -251,17 +252,17 @@ variant		rsid		info		AF		pHWE	callRate
 ```
 
 **SNP summary stat file**
-    * variant (hg19) [CHROM:POS:REF:ALT]
-    * rsid
-    * nCompleteSamples (non-missing samples)
-    * AC (non-missing sample allele count)
-    * ytx (case/control = dosage weighted alternate allele count in cases; quantitative = dosage weighted mean trait value among alternate allele carriers)
-    * beta
-    * se
-    * pval
-  * Example SNP summary stat: 
+  * variant (hg19) [CHROM:POS:REF:ALT]
+  * rsid
+  * nCompleteSamples (non-missing samples)
+  * AC (non-missing sample allele count)
+  * ytx (case/control = dosage weighted alternate allele count in cases; quantitative = dosage weighted mean trait value among alternate allele carriers)
+  * beta
+  * se
+  * pval
+ * Example SNP summary stat: 
 ```
-variant			rsid		nCompleteSamples	AC		ytx		beta		se		tstat		pval
+variant		rsid		nCompleteSamplesAC		ytx		beta		se		tstat		pval
 5:43888254:C:T	rs13184706	953	4.17176e+01	5.64980e+01	-1.11569e-01	8.01312e-02	-1.39233e+00	1.64152e-01
 5:43888493:C:T	rs58824264	953	9.03529e+00	1.30706e+01	-3.42168e-02	1.68596e-01	-2.02951e-01	8.39217e-01
 5:43888556:T:C	rs72762387	953	4.86235e+01	7.81804e+01	1.31571e-01	7.44976e-02	1.76611e+00	7.77023e-02
