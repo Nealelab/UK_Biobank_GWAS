@@ -103,19 +103,19 @@ We can only apologise that this error was not identified during the QA review an
 
 **Current list of participating UK Biobank Applications**
 
- * **Completed associations**
+**Completed associations**
   * 31063 - "Methodological extensions to estimate genetic heritability and shared risk factors for phenotypes of the UK Biobank"
-   * Primary investigators: Benjamin Neale / Verneri Anttila
+    * Primary investigators: Benjamin Neale / Verneri Anttila
   * 11898 - "Genetic studies of anthropometric traits and methods for analysis of multiple phenotypes"
-   * Primary investigator: Joel Hirschhorn
+    * Primary investigator: Joel Hirschhorn
 
- * **Ongoing analyses**
+**Ongoing analyses**
   * 24983 - "Generating effective therapeutic hypotheses from genomic and hospital linkage data"
-   * Primary investigator: Manuel Rivas
+    * Primary investigator: Manuel Rivas
   * 11425 - "The Social Science Genetic Association Consortium"
-   * Primary investigator: Daniel Benjamin
+    * Primary investigator: Daniel Benjamin
   * 32568 - "Phenomewide Heritability Analysis"
-   * Primary investigator: Jordan Smoller
+    * Primary investigator: Jordan Smoller
 
 ## Sample and Variant QC
 
