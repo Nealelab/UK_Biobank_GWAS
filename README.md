@@ -122,6 +122,7 @@ We can only apologise that this error was not identified during the QA review an
 ### Sample QC
 
 **Primary sample QC parameters for GWAS from ukb_sqc_v2.txt file:**
+  * in.Phasing.Input.chr1_22==1
   * in.white.British.ancestry.subset==1
   * used.in.pca.calculation==1
   * excess.relatives==0
@@ -132,8 +133,8 @@ We can only apologise that this error was not identified during the QA review an
   * Samples redacted = 3 ([-3,-2,-1] in the sample ID) 
 
 **Pre/post QC sample counts**
-  * Samples removed from QC file = 151180
-  * Samples retained in QC file = 337199
+  * Imputed samples removed from QC file = 151180
+  * Imputed samples retained in QC file = 337199
   * NOTE: all samples retained are in the .bgen files
   * NOTE: The ukb_sqc_v2.txt file has more samples than the .bgen files, but the same number of samples as the application specific .sample file
 
@@ -152,6 +153,10 @@ in.Phasing.Input.chrX		      (0/1)	(no/yes) Indicates sample was in the input fo
 in.Phasing.Input.chrXY		      (0/1)	(no/yes) Indicates sample was in the input for phasing of chrXY.
 
 Quick descriptives of categories:
+
+table(in.Phasing.Input.chr1_22)
+     0      1 
+   969 487409 
 
 table(het.missing.outliers)
      0 
@@ -188,6 +193,7 @@ Samples remaining: 337199
 ### Genotype QC
 
 **Primary genotype QC parameters for inclusion to GWAS from ukb_sqc_v2.txt file**
+  * Autosomal SNPs
   * SNPs present in HRC imputation file: `../imputed/resources/HRC/HRC.r1-1.GRCh37.wgs.mac5.sites.tab`
   * pHWE > 1e-10 in 337199 QC positive samples
   * call rate > 0.95 in 337199 QC positive samples
@@ -204,7 +210,7 @@ QC positive sample subset (n = 337199):
 - w/ pHWE > 1e-10: 92,471,744
 - w/ call rate > 95%: 92,693,895
 - w/ 0.001 < MAF < 0.999: 16,047,294
-- w/ INFO score > 0.8: 29,447,617
+- w/ UKBB INFO score > 0.8: 29,447,617
 - w/ all of above: 10,894,596
 ```
 
