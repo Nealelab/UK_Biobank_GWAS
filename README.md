@@ -214,6 +214,8 @@ This allows us to take advantage of large cluster computing and parallel process
     * 110 phenotypes when the missingness structure of all phenotypes is the same
     * 37 phenotypes when each phenotype has a different missingness structure
  * A critical consideration in designing the association pipeline was to avoid commands that would invoke shuffles in Spark
+ * The following modifications were made to the Spark configuration while running linreg3 (step 7 below):
+    * spark.memory.storageFraction=0.5,spark.memory.fraction=0.4,spark.broadcast.blockSize=128m,spark.dynamicAllocation.enabled=false,spark.executor.memory=38g,spark.executor.cores=8
 
 ### Workflow for running associations in Hail for phenotypes across multiple applications:
    1)  Merge chromosome-specific `ukb_mfi_chr*_v2.txt` files into one `ukb_mfi_v2.tsv` file with a chromosome field
