@@ -228,7 +228,7 @@ This allows us to take advantage of large cluster computing and parallel process
  * However, memory constraints limited our blocks to:
     * 110 phenotypes when the missingness structure of all phenotypes is the same
     * 37 phenotypes when each phenotype has a different missingness structure
- * A critical consideration in designing the association pipeline was to avoid commands that would invoke shuffles in Spark
+ * A critical consideration in designing the linreg3 pipeline (step 7 below) was to avoid commands that would invoke shuffles in Spark 
  * The following modifications were made to the Spark configuration while running linreg3 (step 7 below):
     * spark.memory.storageFraction=0.5,spark.memory.fraction=0.4,spark.broadcast.blockSize=128m,spark.dynamicAllocation.enabled=false,spark.executor.memory=38g,spark.executor.cores=8
 
