@@ -1,6 +1,22 @@
 # UK Biobank GWAS
 
-**GOALS:**
+# Table of Contents
+* [Goals](#goals) 
+* [Files](#files)
+* [UK Biobank updates](#updates)
+* [Phenotypes and applications](#phenotypes-and-applications)
+  * [Phenotype output](#phenotype-output)
+  * [Phenotype / Genotype linking](#phenotype-genotype-linking)
+* [Sample and Variant QC](#sample-and-variant-qc)
+  * [Sample QC](#sample-qc)
+  * [Variant QC](#variant-qc)
+* [Association in Hail](#hail-association)
+  * [Association Model](#association-model)
+* [Summary stat output](#summary-stat-output)
+
+
+## GOALS:
+
  * Collect UK Biobank phenotypes from collaborating applications 
  * When necessary, convert phenotypes into accessible case/control or quantitative values using the PHESANT algorithm
  * Use the same sample and variant QC across all phenotypes
@@ -8,23 +24,18 @@
  * Provide per-SNP summary stats for all approved phenotypes
  * GWAS Results available for viewing and download via https://biobankengine.stanford.edu/search# (run by the Rivas Lab at Stanford)
 
-* [Workflow](#workflow)
-   1. [Files](#files)
-   2. [UK Biobank updates](#updates)
-   3. [Phenotypes and applications](#phenotypes-and-applications)
-   4. [Sample and Variant QC](#sample-and-variant-qc)
-   5. [Association in Hail](#hail-association)
-   6. [Summary stat output](#summary-stat-output)
 
 ## Files
 
- * **ukb1859** - Liam Abbott's scripts to run Hail's linreg3 on application 1859
- * **PHESANT_pipeline.pdf** - Diagram of PHESANT phenotype curation strategy
+  * [ukb1859_map_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_map_results.py) - mapping results to storage
+  * [ukb1859_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_build_pipelines.py) - setting up pipelines for parallel regression
+  * [ukb1859_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_linreg3.py) - running linreg3 regression on phenotypes in hail
+  * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - Diagram of PHESANT phenotype curation strategy
 
 ## UK Biobank Updates
 
 **July 27th, 2017 - Errors in imputation identified**
-  * non-HRC imputation was mis-mapped. Details below:
+  * Imputation of non-HRC SNPs was mis-mapped. Email details below:
 ```
 We have identified a problem with the UK Biobank imputed data and which has come to light following discussion via the UKB-GENETICS mail list.
 This problem relates to the imputed data and does not affect the genotyped data from the Affymetrix array. 
@@ -52,10 +63,10 @@ We can only apologise that this error was not identified during the QA review an
 
 **Current list of participating UK Biobank Applications**
   * 18597 - Primary investigators: Benjamin Neale / Verneri Anttila
-  * 11898 - Joel Hirschhorn
-  * 11425 - Daniel Benjamin
-  * 32568 - Jordan Smoller
-  * 24983 - Manuel Rivas
+  * 11898 - Primary investigator: Joel Hirschhorn
+  * 11425 - Primary investigator: Daniel Benjamin
+  * 32568 - Primary investigator: Jordan Smoller
+  * 24983 - Primary investigator: Manuel Rivas
 
 **Phenotype Collection Strategy**
   * Collect as many phenotypes as possible from collaborating UK Biobank applications
@@ -67,7 +78,7 @@ We can only apologise that this error was not identified during the QA review an
     * Source repository: https://github.com/MRCIEU/PHESANT
     * Customized PHESANT repository: https://github.com/astheeggeggs/PHESANT
 
-**Phenotype output**
+### Phenotype output
   * PHESANT ukb[XXXX]_output.tsv = full phenotype file with rows=sample ID and columns=phenotype ID
   * Summary file: ukb[XXXX]_phenosummary_final.tsv
     * row number - numeric field matching UK Biobank data showcase field
@@ -79,16 +90,24 @@ We can only apologise that this error was not identified during the QA review an
     * Notes - extended description of phenotype
     * PHESANT.notes - categorizations of phenotype by PHESANT algorithm
     * PHESANT.reassignments - changes to phenotype values by PHESANT
+  * Example phenosummary_final.tsv file
+```
+Field		N.non.missing		N.missing		N.cases	N.controls		Notes		PHESANT.notes		PHESANT.reassignments
+46	Hand grip strength (left)	335821	1378	NA	NA	Left grip strength	46_0|| INTEGER || CONTINUOUS || IRNT ||	NA
+47	Hand grip strength (right)	335842	1357	NA	NA	Right grip strength	47_0|| INTEGER || CONTINUOUS || IRNT ||	NA
+48	Waist circumference	336639	560	NA	NA	Waist circumference	48_0|| CONTINUOUS MAIN || CONTINUOUS || IRNT ||	NA
+49	Hip circumference	336601	598	NA	NA	Hip circumference	49_0|| CONTINUOUS MAIN || CONTINUOUS || IRNT ||	NA
+```
 
-**Phenotype / Genotype linking**
-  * The main link files from application to UK Biobank imputed dataset are the .fam and .sample file
-  * both files have the same IDs
-  	* the .fam file is ordered the same way as the ukb_sqc_v2.txt file
-  	* the .sample file is ordered the same way as the .bgen file
+### Phenotype / Genotype linking
+  * The main link files from application to UK Biobank imputed dataset are the **.fam** and **.sample** file
+  * Both files have the same IDs
+  	* The .fam file is ordered the same way as the ukb_sqc_v2.txt file
+  	* The .sample file is ordered the same way as the .bgen file
 
 ## Sample and Variant QC
 
-**Sample QC** 
+### Sample QC
 
 **Primary sample QC parameters for GWAS from ukb_sqc_v2.txt file:**
   * in.white.British.ancestry.subset==1
@@ -154,7 +173,7 @@ Marked as sex chromosome aneuploidies (remove): 652
 Samples remaining: 337199
 ```
 
-**Genotype QC** 
+### Genotype QC
 
 **Primary genotype QC parameters for inclusion to GWAS from ukb_sqc_v2.txt file:**
   * SNPs present in HRC imputation file: `../imputed/resources/HRC/HRC.r1-1.GRCh37.wgs.mac5.sites.tab`
@@ -177,7 +196,7 @@ QC positive sample subset (n = 337199):
 - w/ all of above: 10,894,597
 ```
 
-**Association in Hail**
+## Association in Hail
 
 SNP association is performed on UKBB imputed dosage BGEN files using hail on a google cloud platform.
 
@@ -187,7 +206,7 @@ SNP association is performed on UKBB imputed dosage BGEN files using hail on a g
 
 This allows us to take advantage of large cluster computing and parallel processing via Apache Spark
 
-**Association model**
+### Association model
  * **To expedite our initial GWAS, we implemented a linear regression model on all phenotypes**
  * Linear regression model covariates were sex and the first 10 PCs (taken directly from ukb_sqc_v2.txt) 
  * Hail's [linreg3] command used for all phenotypes
@@ -206,9 +225,9 @@ This allows us to take advantage of large cluster computing and parallel process
     7) Export summary stats (detailed below)  	   
 ```
  * Examples scripts are listed here
-  * [ukb1859_map_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/ukb1859_map_results.py)
-  * [ukb1859_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/ukb1859_build_pipelines.py)
-  * [ukb1859_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/ukb1859_linreg3.py)
+  * [ukb1859_map_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_map_results.py)
+  * [ukb1859_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_build_pipelines.py)
+  * [ukb1859_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_linreg3.py)
 
 
 ## Summary stat output
@@ -222,7 +241,7 @@ This allows us to take advantage of large cluster computing and parallel process
     * callRate
   * Example SNP information: 
 ```	
-variant	rsid	info	AF	pHWE	callRate
+variant		rsid		info		AF		pHWE	callRate
 10:61334:G:A	rs183305313	8.46690e-01	4.82208e-03	4.77873e-03	1.00000e+00
 10:69083:C:T	rs35418599	8.01306e-01	7.77212e-01	7.74927e-01	9.99961e-01
 10:90127:C:T	rs185642176	9.84897e-01	8.62740e-02	2.77123e-01	1.00000e+00
@@ -242,7 +261,7 @@ variant	rsid	info	AF	pHWE	callRate
     * pval
   * Example SNP summary stat: 
 ```
-variant	rsid	nCompleteSamples	AC	ytx	beta	se	tstat	pval
+variant			rsid		nCompleteSamples	AC		ytx		beta		se		tstat		pval
 5:43888254:C:T	rs13184706	953	4.17176e+01	5.64980e+01	-1.11569e-01	8.01312e-02	-1.39233e+00	1.64152e-01
 5:43888493:C:T	rs58824264	953	9.03529e+00	1.30706e+01	-3.42168e-02	1.68596e-01	-2.02951e-01	8.39217e-01
 5:43888556:T:C	rs72762387	953	4.86235e+01	7.81804e+01	1.31571e-01	7.44976e-02	1.76611e+00	7.77023e-02
