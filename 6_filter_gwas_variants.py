@@ -4,7 +4,7 @@ from hail import *
 
 hc = HailContext()
 
-BUCKET = 'gs://ukbb_association/'
+BUCKET = '...'
 APPLICATION = 'test'
 
 VARIANT_VDS = BUCKET + 'all_variants.vds'

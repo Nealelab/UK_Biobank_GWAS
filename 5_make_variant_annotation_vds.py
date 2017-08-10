@@ -4,10 +4,12 @@ from hail import *
 
 hc = HailContext()
 
-BUCKET = 'gs://ukbb_association/'
+BUCKET = '...'
 APPLICATION = 'test'
 
-BGEN_FILES = 'gs://fc-9a7c5487-04c9-4182-b3ec-13de7f6b409b/imputed/ukb_imp_chr*_v2.bgen'
+BGEN_BUCKET = '...'
+
+BGEN_FILES = BGEN_BUCKET + 'imputed/ukb_imp_chr*_v2.bgen'
 SAMPLE_FILE = BUCKET + APPLICATION + '/' + APPLICATION + '.sample'
 
 MFI_FILE = BUCKET + 'ukb_mfi_v2.tsv.bgz'

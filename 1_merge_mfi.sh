@@ -1,7 +1,7 @@
 #!/bin/sh
 
-BGEN_BUCKET="gs://fc-9a7c5487-04c9-4182-b3ec-13de7f6b409b/"
-WORKING_BUCKET="gs://ukbb_association/"
+BGEN_BUCKET="..."
+WORKING_BUCKET="..."
 
 gsutil -m cp ${BGEN_BUCKET}/imputed/ukb_mfi_chr*_v2.txt ./
 

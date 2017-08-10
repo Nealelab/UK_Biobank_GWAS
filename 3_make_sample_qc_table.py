@@ -5,7 +5,7 @@ from hail import *
 
 hc = HailContext()
 
-BUCKET = 'gs://ukbb_association/'
+BUCKET = '...'
 
 APPLICATION = sys.argv[1]
 
