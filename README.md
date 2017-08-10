@@ -18,9 +18,9 @@
 ## GOALS:
 
  * Collect UK Biobank phenotypes from collaborating applications 
- * When necessary, convert phenotypes into accessible case/control or quantitative values using the PHESANT algorithm
+ * When necessary, convert phenotypes into clean case/control, true/false, or quantitative values using the PHESANT algorithm
  * Use the same sample and variant QC across all phenotypes
- * Run SNP association on UKBB imputed dosage BGEN files using hail on a google cloud
+ * Run SNP association on UKBB imputed dosage BGEN files using hail on the google cloud platform
  * Provide per-SNP summary stats for all approved phenotypes
  * GWAS Results available for viewing and download via https://biobankengine.stanford.edu/search# (run by the Rivas Lab at Stanford)
 
@@ -74,9 +74,10 @@ We can only apologise that this error was not identified during the QA review an
   * Add participating Neale Lab members to all applications
 
 **Phenotype Curation Strategy**
-  * Auto-curation will be done by Duncan Palmer using PHESANT: 
+  * Auto-curation of phenotypes using PHESANT: 
     * Source repository: https://github.com/MRCIEU/PHESANT
     * Customized PHESANT repository: https://github.com/astheeggeggs/PHESANT
+    * [PHESANT phenotype curation strategy](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf)
 
 ### Phenotype output
   * PHESANT ukb[XXXX]_output.tsv = full phenotype file with rows=sample ID and columns=phenotype ID
@@ -92,7 +93,8 @@ We can only apologise that this error was not identified during the QA review an
     * PHESANT.reassignments - changes to phenotype values by PHESANT
   * Example phenosummary_final.tsv file
 ```
-Field		N.non.missing		N.missing		N.cases	N.controls		Notes		PHESANT.notes		PHESANT.reassignments
+	Field						N.non.missingN.missingN.cases
+	N.controls		Notes		PHESANT.notes		PHESANT.reassignments
 46	Hand grip strength (left)	335821	1378	NA	NA	Left grip strength	46_0|| INTEGER || CONTINUOUS || IRNT ||	NA
 47	Hand grip strength (right)	335842	1357	NA	NA	Right grip strength	47_0|| INTEGER || CONTINUOUS || IRNT ||	NA
 48	Waist circumference	336639	560	NA	NA	Waist circumference	48_0|| CONTINUOUS MAIN || CONTINUOUS || IRNT ||	NA
@@ -164,7 +166,7 @@ table(used.in.pca.calculation)
  80190 407219 
 
 Total samples in imputed BGEN files: 487409
-Withdrawn samples (remove): 6
+Withdrawn samples (remove): 8
 Redacted samples (remove): 3
 In white, British ancestry subset (keep): 408972
 Used in PCA calculation (keep): 407219
@@ -262,7 +264,7 @@ variant		rsid		info		AF		pHWE		callRate
   * pval
  * Example SNP summary stat: 
 ```
-variant		rsid		nCompleteSamplesAC		ytx		beta		se		tstat		pval
+variant		rsid		nCompleteSamplesAC	ytx		beta		se		tstat		pval
 5:43888254:C:T	rs13184706	953	4.17176e+01	5.64980e+01	-1.11569e-01	8.01312e-02	-1.39233e+00	1.64152e-01
 5:43888493:C:T	rs58824264	953	9.03529e+00	1.30706e+01	-3.42168e-02	1.68596e-01	-2.02951e-01	8.39217e-01
 5:43888556:T:C	rs72762387	953	4.86235e+01	7.81804e+01	1.31571e-01	7.44976e-02	1.76611e+00	7.77023e-02
@@ -270,4 +272,5 @@ variant		rsid		nCompleteSamplesAC		ytx		beta		se		tstat		pval
 5:43888690:C:G	rs147555725	953	5.87843e+00	9.80000e+00	1.98330e-01	2.11226e-01	9.38946e-01	3.48000e-01
 5:43888838:G:C	rs13185925	953	7.21765e+01	1.04306e+02	-2.46341e-02	6.00665e-02	-4.10113e-01	6.81816e-01
 ```
+
 
