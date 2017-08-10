@@ -235,14 +235,13 @@ This allows us to take advantage of large cluster computing and parallel process
      * 0.001 < AF < 0.999
      * pHWE > 1e-10
      * callRate > 0.95
-   7) Use Hail to run VEP annotation on variants remaining after filtering
-   8)  Run associations using linreg3, where for each pipeline (see step 4) in each application, we:
+   7)  Run associations using linreg3, where for each pipeline (see step 4) in each application, we:
      * Read in the BGENs
      * Use the filtered sites-only VDS created in step (6) to filter variants
      * Annotate samples with the pipeline-specific keytable
      * Call the linreg3 command once for each group of phenotypes in the pipeline with the same missingness structure
      * Write out association results to a Hail keytable
-   9)  Export a separate tsv results file (described below) and LDSC summary stat file for each phenotype in each pipelines across all applications
+   8)  Export a separate tsv results file (described below) and LDSC summary stat file for each phenotype in each pipelines across all applications
 
  #### Scripts associated with each step in the workflow above:
    1) `1_merge_mfi.sh`
@@ -251,9 +250,8 @@ This allows us to take advantage of large cluster computing and parallel process
    4) `4_build_pipelines.py`
    5) `5_make_variant_annotation_vds.py`
    6) `6_filter_gwas_variants.py`
-   7) `7_vep_annotate.py`
-   8) `8_run_linreg3.py`
-   9) `9_export_results.py`
+   7) `8_run_linreg3.py`
+   8) `9_export_results.py`
 
 ## Summary stat output
 
