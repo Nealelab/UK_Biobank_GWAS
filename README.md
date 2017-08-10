@@ -267,8 +267,8 @@ This allows us to take advantage of large cluster computing and parallel process
    4) `4_build_pipelines.py`
    5) `5_make_variant_annotation_vds.py`
    6) `6_filter_gwas_variants.py`
-   7) `8_run_linreg3.py`
-   8) `9_export_results.py`
+   7) `7_run_linreg3.py`
+   8) `8_export_results.py`
 
 ## Summary stat output
 
