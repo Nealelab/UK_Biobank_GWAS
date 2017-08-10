@@ -30,13 +30,15 @@
   * [ukb1859_map_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_map_results.py) - mapping results to storage
   * [ukb1859_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_build_pipelines.py) - setting up pipelines for parallel regression
   * [ukb1859_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_linreg3.py) - running linreg3 regression on phenotypes in hail
-  * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - Diagram of PHESANT phenotype curation strategy
+  * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - diagram of PHESANT phenotype curation strategy
+  * [fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/fam_sqc_merge.R) - script to merge ukb_sqc_v2.txt to application-specific .fam file
 
 ## UK Biobank Updates
 
 **July 27th, 2017 - Errors in imputation identified**
   * Imputation of non-HRC SNPs was mis-mapped. Email details below:
 ```
+Dear researcher,
 We have identified a problem with the UK Biobank imputed data and which has come to light following discussion via the UKB-GENETICS mail list.
 This problem relates to the imputed data and does not affect the genotyped data from the Affymetrix array. 
 The genetic data was imputed using two different reference panels.
@@ -60,13 +62,6 @@ We can only apologise that this error was not identified during the QA review an
   * 6 samples identified as being part of our QC positive sample set
 
 ## Phenotypes and applications
-
-**Current list of participating UK Biobank Applications**
-  * 18597 - Primary investigators: Benjamin Neale / Verneri Anttila
-  * 11898 - Primary investigator: Joel Hirschhorn
-  * 11425 - Primary investigator: Daniel Benjamin
-  * 32568 - Primary investigator: Jordan Smoller
-  * 24983 - Primary investigator: Manuel Rivas
 
 **Phenotype Collection Strategy**
   * Collect as many phenotypes as possible from collaborating UK Biobank applications
@@ -104,6 +99,23 @@ We can only apologise that this error was not identified during the QA review an
   * Both files have the same IDs
   	* The .fam file is ordered the same way as the ukb_sqc_v2.txt file
   	* The .sample file is ordered the same way as the .bgen file
+  * [R Script](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/fam_sqc_merge.R) for linking application-specific .fam file and ukb_sqc_v2.txt file
+
+**Current list of participating UK Biobank Applications**
+
+ * **Completed associations**
+  * 31063 - "Methodological extensions to estimate genetic heritability and shared risk factors for phenotypes of the UK Biobank"
+   * Primary investigators: Benjamin Neale / Verneri Anttila
+  * 11898 - "Genetic studies of anthropometric traits and methods for analysis of multiple phenotypes"
+   * Primary investigator: Joel Hirschhorn
+
+ * **Ongoing analyses**
+  * 24983 - "Generating effective therapeutic hypotheses from genomic and hospital linkage data"
+   * Primary investigator: Manuel Rivas
+  * 11425 - "The Social Science Genetic Association Consortium"
+   * Primary investigator: Daniel Benjamin
+  * 32568 - "Phenomewide Heritability Analysis"
+   * Primary investigator: Jordan Smoller
 
 ## Sample and Variant QC
 
@@ -177,11 +189,11 @@ Samples remaining: 337199
 
 **Primary genotype QC parameters for inclusion to GWAS from ukb_sqc_v2.txt file**
   * SNPs present in HRC imputation file: `../imputed/resources/HRC/HRC.r1-1.GRCh37.wgs.mac5.sites.tab`
-  * UKBB pHWE > 1e-10
-  * UKBB call rate > 0.95
+  * pHWE > 1e-10 in 337199 QC positive samples
+  * call rate > 0.95 in 337199 QC positive samples
   * UKBB INFO score > 0.8
-  * QC positive Alternate Allele Frequency  (0.001 > AF < 0.999 in 337199 QC positive samples)
-  * NOTE: MAF and INFO score available in per chromosome files: ukb_mfi_chr*_v2.txt
+  * AF > 0.001 and AF < 0.999 (AF = alternate allele frequency in 337199 QC positive samples)
+  * NOTE: UKBB INFO score available in per chromosome files: ukb_mfi_chr*_v2.txt
 
 ```
 Quick descriptive of genotype inclusion counts:
