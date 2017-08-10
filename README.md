@@ -27,9 +27,6 @@
 
 ## Files
 
-  * [ukb1859_map_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_map_results.py) - mapping results to storage
-  * [ukb1859_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_build_pipelines.py) - setting up pipelines for parallel regression
-  * [ukb1859_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_linreg3.py) - running linreg3 regression on phenotypes in hail
   * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - diagram of PHESANT phenotype curation strategy
   * [fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/fam_sqc_merge.R) - script to merge ukb_sqc_v2.txt to application-specific .fam file
 
