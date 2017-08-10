@@ -208,28 +208,52 @@ This allows us to take advantage of large cluster computing and parallel process
 
 ### Association model
  * **To expedite our initial GWAS, we implemented a linear regression model on all phenotypes**
- * Linear regression model covariates were sex and the first 10 PCs (taken directly from ukb_sqc_v2.txt) 
- * Hail's [linreg3] command used for all phenotypes
-    * Can do up to 110 phneotypes simultaneously when NA structure is identical
-    * Can do up to 37 phenotypes simultaneously when NA structure varies
+ * Linear regression model covariates were inferred sex and the first 10 PCs (taken directly from ukb_sqc_v2.txt)
+ * Hail's [linreg3] command allowed us to run associations on blocks of phenotypes with the same missingness structure at the same time to speed up analysis
+ * However, memory constraints limited our blocks to:
+    * 110 phenotypes when the missingness structure of all phenotypes is the same
+    * 37 phenotypes when each phenotype has a different missingness structure
+ * A critical consideration in designing the association pipeline was to avoid commands that would invoke shuffles in Spark
 
- * STEPS for running regression in Hail:
-```
-    1) Read in .bgen and .sample files
-    2) Read in sqc_v2 covariate file (matched to application-specific phenotypes)
-    3) Read in PHESANT-curated application specific phenotype file
-    4) Subset phenotype file to QC-positive samples:
-       - Turn phenotypes to NA for all QC-negative samples
-    5) Subset genotype file to QC-positive SNPs
-    6) Run linreg3
-    7) Export summary stats (detailed below)  	   
-```
+### Workflow for running associations in Hail for phenotypes across multiple applications:
+   1)  Merge chromosome-specific `ukb_mfi_chr*_v2.txt` files into one `ukb_mfi_v2.tsv` file with a chromosome field
+   2)  Merge `ukb_sqc_v2.txt` sample QC file with application-specific sample IDs using application-specific .fam files
+   3)  Create application-specific Hail keytables with application-specific sample ID, inferred sex (from `ukb_sqc_v2.txt`) and the first 10 PCs (also from `ukb_sqc_v2.txt`), subset to the set of 337,199 samples outlined above
+   4)  Build application-specific 'pipelines', where each pipeline is defined by a Hail keytable with (for the subset of 337,199 samples):
+     * application-specific sample ID
+     * inferred sex
+     * PCs 1-10
+     * A block of phenotypes capable of being run through linreg3 in one pass of reading in BGEN -> writing out results keytable
+   5)  Create a sites-only VDS for all 92,693,895 sites in the imputed data with:
+     * rsid
+     * info score (from `ukb_mfi_v2.tsv`)
+     * flag indicating if site is in HRC 1.1 release (`HRC.r1-1.GRCh37.wgs.mac5.sites.tab` file from http://www.haplotype-reference-consortium.org/site)
+     * variant QC metrics from Hail's `variant_qc()` method, calculated on the subset of 337,199 samples
+   6)  Create a filtered sites-only VDS with 10,894,596 variants, that satisfy the criteria:
+     * HRC site
+     * info score > 0.8
+     * 0.001 < AF < 0.999
+     * pHWE > 1e-10
+     * callRate > 0.95
+   7) Use Hail to run VEP annotation on variants remaining after filtering
+   8)  Run associations using linreg3, where for each pipeline (see step 4) in each application, we:
+     * Read in the BGENs
+     * Use the filtered sites-only VDS created in step (6) to filter variants
+     * Annotate samples with the pipeline-specific keytable
+     * Call the linreg3 command once for each group of phenotypes in the pipeline with the same missingness structure
+     * Write out association results to a Hail keytable
+   9)  Export a separate tsv results file (described below) and LDSC summary stat file for each phenotype in each pipelines across all applications
 
- * Examples scripts are listed here:
-  * [ukb1859_map_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_map_results.py)
-  * [ukb1859_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_build_pipelines.py)
-  * [ukb1859_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/ukb1859_linreg3.py)
-
+ #### Scripts associated with each step in the workflow above:
+   1) `merge_mfi.sh`
+   2) ...
+   3) `make_sample_qc_table.py`
+   4) `build_pipelines.py`
+   5) `make_variant_annotation_vds.py`
+   6) `filter_gwas_variants.py`
+   7) `vep_annotate.py`
+   8) `run_linreg3.py`
+   9) `export_results.py`
 
 ## Summary stat output
 
