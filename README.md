@@ -245,15 +245,15 @@ This allows us to take advantage of large cluster computing and parallel process
    9)  Export a separate tsv results file (described below) and LDSC summary stat file for each phenotype in each pipelines across all applications
 
  #### Scripts associated with each step in the workflow above:
-   1) `merge_mfi.sh`
+   1) `1_merge_mfi.sh`
    2) ...
-   3) `make_sample_qc_table.py`
-   4) `build_pipelines.py`
-   5) `make_variant_annotation_vds.py`
-   6) `filter_gwas_variants.py`
-   7) `vep_annotate.py`
-   8) `run_linreg3.py`
-   9) `export_results.py`
+   3) `3_make_sample_qc_table.py`
+   4) `4_build_pipelines.py`
+   5) `5_make_variant_annotation_vds.py`
+   6) `6_filter_gwas_variants.py`
+   7) `7_vep_annotate.py`
+   8) `8_run_linreg3.py`
+   9) `9_export_results.py`
 
 ## Summary stat output
 
