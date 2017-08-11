@@ -50,7 +50,11 @@ The problem is not easy to fix post-hoc, so we intend to re-impute the data from
 For now we recommend that researchers focus exclusively on SNPs in the HRC panel, or work with the directly genotyped data until the new release is available.  
 We will progress the re-imputation as quickly as we can and expect to release a new version of the imputed files ideally in September.
 We will send more details about this data release and confirm timelines in due course. 
-We can only apologise that this error was not identified during the QA review and do not underestimate the frustration this will cause for the research community.*
+We can only apologise that this error was not identified during the QA review and do not underestimate the frustration this will cause for the research community.  
+If you have any questions about this issue please send them to the UKB-GENETICS mail list to https://www.jiscmail.ac.uk/cgi-bin/webadmin?A0=UKB-GENETICS*
+
+*Kind regards,  
+UK Biobank & the Access Team*
 
 **July 26th, 2017 - Samples withdrawn from UK Biobank**
   * 23 samples have withdrawn consent for use of their data
