@@ -61,6 +61,16 @@ UK Biobank & the Access Team*
   * 8 samples listed in imputed data sample file
   * 6 samples identified as being part of our QC positive sample set
 
+*Dear Researcher,  
+As you are aware, participants are free to withdraw from UK Biobank at any time and request that their data no longer be used.  
+Since our last review, some participants involved with Application [XXXX] have requested that their data should no longer be used.  
+We have attached a file containing the anonymised IDs of these participants and any others who have withdrawn previously.  
+Please remove the corresponding records from your unpublished analyses.  
+Note that it is possible that this list contains IDs which you have never received as they may have withdrawn before your final dataset was generated.*
+ 
+*Regards,  
+The UK Biobank Access Team*
+
 ## Phenotypes and applications
 
 **Phenotype Collection Strategy**
