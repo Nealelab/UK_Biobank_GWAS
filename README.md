@@ -3,19 +3,19 @@
 # Table of Contents
 * [Goals](#goals) 
 * [Files](#files)
-* [UK Biobank updates](#uk-biobank-updates)
+* [UK Biobank Updates](#updates)
 * [Phenotypes and applications](#phenotypes-and-applications)
   * [Phenotype output](#phenotype-output)
-  * [Phenotype to Genotype linking](#phenotype-to-genotype-linking)
+  * [Phenotype to Genotype linking](#phenotype-genotype-linking)
 * [Sample and Variant QC](#sample-and-variant-qc)
   * [Sample QC](#sample-qc)
-  * [Genotype QC](#genotype-qc)
-* [Association in Hail](#association-in-hail)
+  * [Genotype QC](#variant-qc)
+* [Association in Hail](#hail-association)
   * [Association Model](#association-model)
 * [Summary stat output](#summary-stat-output)
 
 
-## GOALS:
+## Goals:
 
  * Collect UK Biobank phenotypes from collaborating applications 
  * When necessary, convert phenotypes into clean case/control, true/false, or quantitative values using the PHESANT algorithm
@@ -34,49 +34,28 @@
 
 **July 27th, 2017 - Errors in imputation identified**
   * Imputation of non-HRC SNPs was mis-mapped. Email details below:
-```
-Dear researcher,
 
-We have identified a problem with the UK Biobank imputed data and which has come to light following discussion via the UKB-GENETICS mail list.
+*Dear researcher,  
+We have identified a problem with the UK Biobank imputed data and which has come to light following discussion via the UKB-GENETICS mail list.  
 This problem relates to the imputed data and does not affect the genotyped data from the Affymetrix array. 
-The genetic data was imputed using two different reference panels.
-The Haplotype Reference Consortium (HRC) panel was used as first choice option, but for SNPs not in that reference panel the UK10K + 1000 Genomes panel was used.
-The problem arose in the second set of imputed data from the UK10K + 1000 Genomes panel.
+The genetic data was imputed using two different reference panels.  
+The Haplotype Reference Consortium (HRC) panel was used as first choice option, but for SNPs not in that reference panel the UK10K + 1000 Genomes panel was used.  
+The problem arose in the second set of imputed data from the UK10K + 1000 Genomes panel.  
 The genotypes at these SNPs are imputed correctly, but have not been recorded as having the correct genome position in the files.
 We have established that the imputed data from the HRC panel is not affected and has the correct positions.
 This is about ~40M sites and will include the majority of the common SNPs i.e. sites most likely to show genetic associations.
 These sites are readily identified since the HRC site list is public
-http://www.haplotype-reference-consortium.org/site
-The problem is not easy to fix post-hoc, so we intend to re-impute the data from the UK10K + 1000 Genomes panel and re-release the imputed data.
-For now we recommend that researchers focus exclusively on SNPs in the HRC panel, or work with the directly genotyped data until the new release is available.
+http://www.haplotype-reference-consortium.org/site  
+The problem is not easy to fix post-hoc, so we intend to re-impute the data from the UK10K + 1000 Genomes panel and re-release the imputed data.  
+For now we recommend that researchers focus exclusively on SNPs in the HRC panel, or work with the directly genotyped data until the new release is available.  
 We will progress the re-imputation as quickly as we can and expect to release a new version of the imputed files ideally in September.
 We will send more details about this data release and confirm timelines in due course. 
-We can only apologise that this error was not identified during the QA review and do not underestimate the frustration this will cause for the research community.
-
-If you have any questions about this issue please send them to the UKB-GENETICS mail list to https://www.jiscmail.ac.uk/cgi-bin/webadmin?A0=UKB-GENETICS
-
-Kind regards,
-UK Biobank & the Access Team
-```
+We can only apologise that this error was not identified during the QA review and do not underestimate the frustration this will cause for the research community.*
 
 **July 26th, 2017 - Samples withdrawn from UK Biobank**
   * 23 samples have withdrawn consent for use of their data
   * 8 samples listed in imputed data sample file
   * 6 samples identified as being part of our QC positive sample set
-```
-Dear Researcher,
-
-As you are aware, participants are free to withdraw from UK Biobank at any time and request that their data no longer be used.
-Since our last review, some participants involved with Application [XXXX] have requested that their data should no longer be used.
-We have attached a file containing the anonymised IDs of these participants and any others who have withdrawn previously.
-Please remove the corresponding records from your unpublished analyses.
-Note that it is possible that this list contains IDs which you have never received as they may have withdrawn before your final dataset was generated.
-
-Regards,
-The UK Biobank Access Team
-http://www.ukbiobank.ac.uk/
-```
-
 
 ## Phenotypes and applications
 
@@ -89,7 +68,26 @@ http://www.ukbiobank.ac.uk/
   * Auto-curation of phenotypes using PHESANT: 
     * Source repository: https://github.com/MRCIEU/PHESANT
     * Customized PHESANT repository: https://github.com/astheeggeggs/PHESANT
-    * [PHESANT phenotype curation strategy](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf)
+      * Transformed phenotypes are written to disk
+      * Altered .log file for easier creation of downstream plotting and summary files
+      * Removed additional analysis and plotting functionality not required for our purposes
+      * Altered the variable-list file `variable-info/outcome_info_final.tsv` to restrict to the phenotypes we wish to analyze - see 'EXCLUDED' column
+      * Added data codings tables from UK biobank data showcase to allow mapping from original encoding in phenotype file (e.g. 1 = 'bungalow', 2 = 'flat' etc)
+      * Added additional scripts for creation of simple test plots and summary tables
+      * [PHESANT phenotype curation strategy](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf)
+
+**Example PHESANT script**
+```
+Rscript phenomeScan.r \
+--phenofile="../../ukb[XXXX].tsv" \
+--variablelistfile="../variable-info/outcome_info_final.tsv" \
+--datacodingfile="../variable-info/data-coding-ordinal-info.txt" \
+--userId="userId" \
+--resDir="../../" \
+--log="ukb[XXXX]_output" \
+```
+
+generates an output file. Finally, run `get_hists_and_notes` followed by `include_PHESANT_reassignment_names` in `summarise_phenoypes.r` to generate a summary file of the phenotypes for analysis. Note: the sample QC file `ukb[XXXX]_qc.tsv` and participant withdrawal list `w[XXXX]_20170726.csv` for each application is required to ensure that numbers in the summary file reflect the QC pipeline described below.
 
 ### Phenotype output
   * Output file: **PHESANT ukb[XXXX]_output.tsv** (full phenotype file with rows=sample ID and columns=phenotype ID)
