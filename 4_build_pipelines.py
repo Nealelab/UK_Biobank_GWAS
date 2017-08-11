@@ -16,7 +16,7 @@ PHESANT_FILE = PREFIX + 'output.tsv'
 
 kt = (
     hc
-    .import_table(PHESANT_FILE, impute=True, types={'userId': TString()}, quote='"')
+    .import_table(PHESANT_FILE, impute=True, types={'userId': TString()})
     .rename({'userId': 'ID'})
     .key_by('ID')
     .join(hc.read_table(SAMPLE_QC_TABLE), how='inner')
