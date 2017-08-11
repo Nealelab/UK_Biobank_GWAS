@@ -3,14 +3,14 @@
 # Table of Contents
 * [Goals](#goals) 
 * [Files](#files)
-* [UK Biobank updates](#updates)
+* [UK Biobank updates](#uk-biobank-updates)
 * [Phenotypes and applications](#phenotypes-and-applications)
   * [Phenotype output](#phenotype-output)
-  * [Phenotype to Genotype linking](#phenotype-genotype-linking)
+  * [Phenotype to Genotype linking](#phenotype-to-genotype-linking)
 * [Sample and Variant QC](#sample-and-variant-qc)
   * [Sample QC](#sample-qc)
-  * [Genotype QC](#variant-qc)
-* [Association in Hail](#hail-association)
+  * [Genotype QC](#genotype-qc)
+* [Association in Hail](#association-in-hail)
   * [Association Model](#association-model)
 * [Summary stat output](#summary-stat-output)
 
@@ -36,6 +36,7 @@
   * Imputation of non-HRC SNPs was mis-mapped. Email details below:
 ```
 Dear researcher,
+
 We have identified a problem with the UK Biobank imputed data and which has come to light following discussion via the UKB-GENETICS mail list.
 This problem relates to the imputed data and does not affect the genotyped data from the Affymetrix array. 
 The genetic data was imputed using two different reference panels.
@@ -51,12 +52,31 @@ For now we recommend that researchers focus exclusively on SNPs in the HRC panel
 We will progress the re-imputation as quickly as we can and expect to release a new version of the imputed files ideally in September.
 We will send more details about this data release and confirm timelines in due course. 
 We can only apologise that this error was not identified during the QA review and do not underestimate the frustration this will cause for the research community.
+
+If you have any questions about this issue please send them to the UKB-GENETICS mail list to https://www.jiscmail.ac.uk/cgi-bin/webadmin?A0=UKB-GENETICS
+
+Kind regards,
+UK Biobank & the Access Team
 ```
 
 **July 26th, 2017 - Samples withdrawn from UK Biobank**
   * 23 samples have withdrawn consent for use of their data
   * 8 samples listed in imputed data sample file
   * 6 samples identified as being part of our QC positive sample set
+```
+Dear Researcher,
+
+As you are aware, participants are free to withdraw from UK Biobank at any time and request that their data no longer be used.
+Since our last review, some participants involved with Application [XXXX] have requested that their data should no longer be used.
+We have attached a file containing the anonymised IDs of these participants and any others who have withdrawn previously.
+Please remove the corresponding records from your unpublished analyses.
+Note that it is possible that this list contains IDs which you have never received as they may have withdrawn before your final dataset was generated.
+
+Regards,
+The UK Biobank Access Team
+http://www.ukbiobank.ac.uk/
+```
+
 
 ## Phenotypes and applications
 
