@@ -27,8 +27,15 @@
 
 ## Files
 
+  * [1_merge_mfi.sh](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/1_merge_mfi.sh) - merge UKBB mfi files
+  * [2_fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/fam_sqc_merge.R) - merge ukb_sqc_v2.txt to application-specific .fam file
+  * [3_make_sample_qc_table.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/3_make_sample_qc_table.py) - make application-specific qc key table
+  * [4_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/4_build_pipelines.py) - set up block of phenotypes to be analyzed
+  * [5_make_variant_annotation_vds.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/5_make_variant_annotation_vds.py) - create sites-only VDS of all SNPs
+  * [6_filter_gwas_variants.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/6_filter_gwas_variants.py) - filter sites-only VDS to QC'ed SNPs
+  * [7_run_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/7_run_linreg3.py) - run association with linreg3 command
+  * [8_export_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/8_export_results.py) - export results to .tsv file
   * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - diagram of PHESANT phenotype curation strategy
-  * [fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/fam_sqc_merge.R) - script to merge ukb_sqc_v2.txt to application-specific .fam file
 
 ## UK Biobank Updates
 
@@ -128,7 +135,7 @@ generates an output file. Finally, run `get_hists_and_notes` followed by `includ
   * Both files have the same IDs
   	* The .fam file is ordered the same way as the ukb_sqc_v2.txt file
   	* The .sample file is ordered the same way as the .bgen file
-  * [R Script](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/fam_sqc_merge.R) for linking application-specific .fam file and ukb_sqc_v2.txt file
+  * [R Script](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/2_fam_sqc_merge.R) for linking application-specific .fam file and ukb_sqc_v2.txt file
 
 **Current list of participating UK Biobank Applications**
 
