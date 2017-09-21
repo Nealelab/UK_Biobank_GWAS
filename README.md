@@ -349,3 +349,5 @@ variant		rsid		nCompleteSamplesAC	ytx		beta		se		tstat		pval
 5:43888838:G:C	rs13185925	953	7.21765e+01	1.04306e+02	-2.46341e-02	6.00665e-02	-4.10113e-01	6.81816e-01
 ```
 
+**Variants are of the form CHR:POS:REF:ALT, where the ALT allele is the effect allele in the model.**
+
