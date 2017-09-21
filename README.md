@@ -140,7 +140,7 @@ generates an output file. Finally, run `get_hists_and_notes` followed by `includ
 **Current list of participating UK Biobank Applications**
 
 **Completed associations**
-  * 31063 - "Methodological extensions to estimate genetic heritability and shared risk factors for phenotypes of the UK Biobank"
+  * 18597 - "Methodological extensions to estimate genetic heritability and shared risk factors for phenotypes of the UK Biobank"
     * Primary investigators: Benjamin Neale / Verneri Anttila
   * 11898 - "Genetic studies of anthropometric traits and methods for analysis of multiple phenotypes"
     * Primary investigator: Joel Hirschhorn
@@ -311,7 +311,9 @@ This allows us to take advantage of large cluster computing and parallel process
 
 ## Summary stat output
 
-**QCed SNP information file**
+**NOTE:the alternate allele is NOT the minor allele, but the non-reference allele as stated in the UK Biobank ukb_mfi_chr*_v2.txt file**
+
+**QCed SNP information file (variants.tsv)**
   * variant (hg19) [CHROM:POS:REF:ALT]
   * rsid
   * info (UKBB INFO score)
@@ -329,7 +331,7 @@ variant		rsid		info		AF		pHWE		callRate
 10:94538:C:T	rs189409193	8.24138e-01	5.50862e-03	9.37271e-01	1.00000e+00
 ```
 
-**SNP summary stat file**
+**SNP summary stat file ([FieldID]_assoc.tsv.gz)**
   * variant (hg19) [CHROM:POS:REF:ALT]
   * rsid
   * nCompleteSamples (non-missing samples)
@@ -340,13 +342,13 @@ variant		rsid		info		AF		pHWE		callRate
   * pval
  * Example SNP summary stat: 
 ```
-variant		rsid		nCompleteSamplesAC	ytx		beta		se		tstat		pval
-5:43888254:C:T	rs13184706	953	4.17176e+01	5.64980e+01	-1.11569e-01	8.01312e-02	-1.39233e+00	1.64152e-01
-5:43888493:C:T	rs58824264	953	9.03529e+00	1.30706e+01	-3.42168e-02	1.68596e-01	-2.02951e-01	8.39217e-01
-5:43888556:T:C	rs72762387	953	4.86235e+01	7.81804e+01	1.31571e-01	7.44976e-02	1.76611e+00	7.77023e-02
-5:43888648:C:T	rs115032754	953	3.77647e+01	5.40039e+01	-5.98780e-02	8.59590e-02	-6.96588e-01	4.86233e-01
-5:43888690:C:G	rs147555725	953	5.87843e+00	9.80000e+00	1.98330e-01	2.11226e-01	9.38946e-01	3.48000e-01
-5:43888838:G:C	rs13185925	953	7.21765e+01	1.04306e+02	-2.46341e-02	6.00665e-02	-4.10113e-01	6.81816e-01
+variant		rsid		nCompleteSamples	AC	ytx		beta		se		tstat		pval
+5:43888254:C:T	rs13184706	953		4.17176e+01	5.64980e+01	-1.11569e-01	8.01312e-02	-1.39233e+00	1.64152e-01
+5:43888493:C:T	rs58824264	953		9.03529e+00	1.30706e+01	-3.42168e-02	1.68596e-01	-2.02951e-01	8.39217e-01
+5:43888556:T:C	rs72762387	953		4.86235e+01	7.81804e+01	1.31571e-01	7.44976e-02	1.76611e+00	7.77023e-02
+5:43888648:C:T	rs115032754	953		3.77647e+01	5.40039e+01	-5.98780e-02	8.59590e-02	-6.96588e-01	4.86233e-01
+5:43888690:C:G	rs147555725	953		5.87843e+00	9.80000e+00	1.98330e-01	2.11226e-01	9.38946e-01	3.48000e-01
+5:43888838:G:C	rs13185925	953		7.21765e+01	1.04306e+02	-2.46341e-02	6.00665e-02	-4.10113e-01	6.81816e-01
 ```
 
 **Variants are of the form CHR:POS:REF:ALT, where the ALT allele is the effect allele in the model.**
