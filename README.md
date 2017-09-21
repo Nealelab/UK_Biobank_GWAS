@@ -311,7 +311,9 @@ This allows us to take advantage of large cluster computing and parallel process
 
 ## Summary stat output
 
-**NOTE:the alternate allele is NOT the minor allele, but the non-reference allele as stated in the UK Biobank ukb_mfi_chr*_v2.txt file**
+**NOTE 1: Variants are of the form CHR:POS:REF:ALT, where the ALT allele is the effect allele in the model.**
+**NOTE 2: The ALT allele is NOT always the minor allele, but the non-reference allele as stated in the UK Biobank ukb_mfi_chr*_v2.txt and our variants.tsv file.**
+
 
 **QCed SNP information file (variants.tsv)**
   * variant (hg19) [CHROM:POS:REF:ALT]
@@ -351,5 +353,4 @@ variant		rsid		nCompleteSamples	AC	ytx		beta		se		tstat		pval
 5:43888838:G:C	rs13185925	953		7.21765e+01	1.04306e+02	-2.46341e-02	6.00665e-02	-4.10113e-01	6.81816e-01
 ```
 
-**Variants are of the form CHR:POS:REF:ALT, where the ALT allele is the effect allele in the model.**
 
