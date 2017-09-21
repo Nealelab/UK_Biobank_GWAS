@@ -311,8 +311,8 @@ This allows us to take advantage of large cluster computing and parallel process
 
 ## Summary stat output
 
-**NOTE 1: Variants are of the form CHR:POS:REF:ALT, where the ALT allele is the effect allele in the model.**
-**NOTE 2: The ALT allele is NOT always the minor allele, but the non-reference allele as stated in the UK Biobank ukb_mfi_chr*_v2.txt and our variants.tsv file.**
+**NOTE 1: Variants are of the form CHR:POS:REF:ALT, where the ALT allele is the effect allele in the model.**<br />
+**NOTE 2: The ALT allele is NOT always the minor allele, but the non-reference allele as stated in the UK Biobank ukb_mfi_chr*_v2.txt and our variants.tsv file.**<br />
 
 
 **QCed SNP information file (variants.tsv)**
