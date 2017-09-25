@@ -13,7 +13,7 @@
 * [Association in Hail](#hail-association)
   * [Association Model](#association-model)
 * [Summary stat output](#summary-stat-output)
-
+* [Quick Manhattan and QQ plot](#quick-manhattan-and-qq-plot)
 
 ## Goals:
 
@@ -352,6 +352,39 @@ variant		rsid		nCompleteSamples	AC	ytx		beta		se		tstat		pval
 5:43888648:C:T	rs115032754	953		3.77647e+01	5.40039e+01	-5.98780e-02	8.59590e-02	-6.96588e-01	4.86233e-01
 5:43888690:C:G	rs147555725	953		5.87843e+00	9.80000e+00	1.98330e-01	2.11226e-01	9.38946e-01	3.48000e-01
 5:43888838:G:C	rs13185925	953		7.21765e+01	1.04306e+02	-2.46341e-02	6.00665e-02	-4.10113e-01	6.81816e-01
+```
+
+
+## Quick Manhattan and QQ plot
+
+**R Scripts to generate basic Manhattan and QQ plots on a single summary stat file**
+
+  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Manhattan_plot.R)
+        * Creates manhattan plot on SNPs with p < .001
+        * Requires > 1 Gb memory to read in summary stat file
+	* Example usage:
+```
+## generic example:
+Rscript Manhattan_plot.R [summary stat file] [output name]
+
+## actual example:
+Rscript Manhattan_plot.R 2443.assoc.tsv.gz /home/user/graphs/2443
+
+## generates: /home/user/graphs/2443_Manhattan.png file
+```
+
+  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/QQ_plot.R)                                                                   
+        * Creates QQ plot on all SNPs                    
+        * Requires > 1 Gb memory to read in summary stat file
+        * Example usage:
+```
+## generic example:
+Rscript QQ_plot.R [summary stat file] [output name]                                     
+
+## actual example:
+Rscript QQ_plot.R 2443.assoc.tsv.gz /home/user/graphs/2443        
+
+## generates: /home/user/graphs/2443_QQ.png file
 ```
 
 
