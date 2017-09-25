@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser(description='Run association on single UKBB phe
 parser.add_argument('--bgens', type=str, required=True, help='Google storage path to UKBB .bgen file(s) (can use "*" to regex match).')
 parser.add_argument('--sample', type=str, required=True, help='Google storage path to application-specific .sample file.')
 parser.add_argument('--fam', type=str, required=True, help='Google storage path to headerless, application-specific .fam file.')
-parser.add_argument('--withdrawn', type=str, required=True, help='Google storage path to headerless ,application-specific list of sample IDs withdrawn from the study.')
+parser.add_argument('--withdrawn', type=str, required=True, help='Google storage path to headerless, application-specific list of sample IDs withdrawn from the study.')
 parser.add_argument('--phenotype', type=str, required=True, help='Google storage path to two-column, headerless tsv file where the first column is application-specific sample IDs and the second column is the phenotype (quantitative or 1/0 for case/control; "NA" to denote missing).')
 parser.add_argument('--working-directory', type=str, required=True, help='Google storage path to working directory to write results and intermediate files.')
 args = parser.parse_args()

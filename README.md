@@ -314,7 +314,7 @@ Use the script `run_single_phenotype.py` to run an association on a single pheno
  * `--bgens` - Google storage path to UKBB .bgen file(s) (can use "\*" to regex match).
  * `--sample` - Google storage path to application-specific .sample file.
  * `--fam` - Google storage path to headerless, application-specific .fam file.
- * `--withdrawn` - Google storage path to headerless ,application-specific list of sample IDs withdrawn from the study.
+ * `--withdrawn` - Google storage path to headerless, application-specific list of sample IDs withdrawn from the study.
  * `--phenotype` - Google storage path to two-column, headerless tsv file where the first column is application-specific sample IDs and the second column is the phenotype (quantitative or 1/0 for case/control; "NA" to denote missing).
  * `--working-directory` - Google storage path to working directory to write results and intermediate files.
 
