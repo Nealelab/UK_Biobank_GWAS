@@ -309,6 +309,31 @@ This allows us to take advantage of large cluster computing and parallel process
    7) `7_run_linreg3.py`
    8) `8_export_results.py`
 
+### Workflow for running association on a single phenotype using Hail
+Use the script `run_single_phenotype.py` to run an association on a single phenotype, using the same set of 337,199 UK Biobank samples and 10,894,596 variants described above. The script requires 6 parameters:
+ * `--bgens` - Google storage path to UKBB .bgen file(s) (can use "\*" to regex match).
+ * `--sample` - Google storage path to application-specific .sample file.
+ * `--fam` - Google storage path to headerless, application-specific .fam file.
+ * `--withdrawn` - Google storage path to headerless ,application-specific list of sample IDs withdrawn from the study.
+ * `--phenotype` - Google storage path to two-column, headerless tsv file where the first column is application-specific sample IDs and the second column is the phenotype (quantitative or 1/0 for case/control; "NA" to denote missing).
+ * `--working-directory` - Google storage path to working directory to write results and intermediate files.
+
+Here's an example of running this script using the [cloudtools](https://github.com/nealelab/cloudtools) interface:
+```
+cluster submit my-cluster run_single_phenotypes.py --args "
+  --bgens gs://<bgens-bucket>/ukb_imp_chr*_v2.bgen
+  --sample gs://mybucket/myapplication.sample
+  --fam gs://mybucket/myapplication.fam
+  --withdrawn gs://mybucket/myapplication_withdrawn.txt
+  --phenotype gs://mybucket/myphenotype.tsv
+  --working-directory gs://mybucket/
+"
+```
+
+This script will write a file `variants.results.tsv` to the specified `--working-directory`, with the format outlined below in the "SNP summary stat file" section.
+
+The script expects the `--phenotype` file to be a two-column tsv file with no header, where the first column contains the application-specific sample ID and the second column contains the phenotype of interest (either quantitative or 1/0 for case control, with missing values coded as "NA").
+
 ## Summary stat output
 
 **NOTES:**
