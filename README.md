@@ -359,7 +359,7 @@ variant		rsid		nCompleteSamples	AC	ytx		beta		se		tstat		pval
 
 **R Scripts to generate basic Manhattan and QQ plots on a single summary stat file**
 
-  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Manhattan_plot.R)
+  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Manhattan_plot.R) 
         * Creates manhattan plot on SNPs with p < .001
         * Requires > 1 Gb memory to read in summary stat file
 	* Example usage:
@@ -373,7 +373,7 @@ Rscript Manhattan_plot.R 2443.assoc.tsv.gz /home/user/graphs/2443
 ## generates: /home/user/graphs/2443_Manhattan.png file
 ```
 
-  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/QQ_plot.R)                                                                   
+  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/QQ_plot.R) 
         * Creates QQ plot on all SNPs                    
         * Requires > 1 Gb memory to read in summary stat file
         * Example usage:
