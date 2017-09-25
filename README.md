@@ -332,7 +332,7 @@ cluster submit my-cluster run_single_phenotypes.py --args "
 
 This script will write a file `variants.results.tsv` to the specified `--working-directory`, with the format outlined below in the "SNP summary stat file" section.
 
-The script expects the `--phenotype` file to be a two-column tsv file with no header, where the first column contains the application-specific sample ID and the second column contains the phenotype of interest (either quantitative or 1/0 for case control, with missing values coded as "NA").
+The script expects the `--phenotype` file to be a two-column tsv file with no header, where the first column contains the application-specific sample ID and the second column contains the phenotype of interest (either quantitative or 1/0 for case/control, with missing values coded as "NA").
 
 ## Summary stat output
 
