@@ -35,18 +35,18 @@ kt_qc = (
 	.import_table(
 		SAMPLE_QC_TSV,
 		types={
-    		'PC1': TDouble(),
-    		'PC2': TDouble(),
-    		'PC3': TDouble(),
-    		'PC4': TDouble(),
-    		'PC5': TDouble(),
-    		'PC6': TDouble(),
-    		'PC7': TDouble(),
-    		'PC8': TDouble(),
-    		'PC9': TDouble(),
-    		'PC10': TDouble()
-    	}
-    )
+			'PC1': TDouble(),
+			'PC2': TDouble(),
+			'PC3': TDouble(),
+			'PC4': TDouble(),
+			'PC5': TDouble(),
+			'PC6': TDouble(),
+			'PC7': TDouble(),
+			'PC8': TDouble(),
+			'PC9': TDouble(),
+			'PC10': TDouble()
+		}
+	)
 	.indexed()
 	.key_by('index')
 )
@@ -62,10 +62,10 @@ kt_withdrawn = (
 kt_phenotype = hc.import_table(args.phenotype, no_header=True, key='f0', types={'f0': TString(), 'f1': TDouble()}).rename({'f1': 'phenotype'})
 
 (
-	kt_fam
-	.join(kt_qc, how='left')
-	.key_by('id')
-	.drop('index')
+    kt_fam
+    .join(kt_qc, how='left')
+    .key_by('id')
+    .drop('index')
     .annotate([
         'in_white_British_ancestry_subset = `in.white.British.ancestry.subset` == "1"',
         'used_in_pca_calculation = `used.in.pca.calculation` == "1"',
@@ -130,7 +130,7 @@ vds = (
     	variant_block_size=8
     )
     .annotate_variants_expr("""
-    	va.results = {
+        va.results = {
     		nCompleteSamples: va.linreg.nCompleteSamples,
     		AC: va.linreg.AC,
     		ytx: va.linreg.ytx[0],
@@ -138,7 +138,7 @@ vds = (
     		se: va.linreg.se[0],
     		tstat: va.linreg.tstat[0],
     		pval: va.linreg.pval[0]
-    	}
+        }
     """)
 )
 
