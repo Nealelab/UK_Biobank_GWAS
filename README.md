@@ -12,6 +12,7 @@
   * [Genotype QC](#genotype-qc)
 * [Association in Hail](#association-in-hail)
   * [Association Model](#association-model)
+  * [Single phenotype association workflow](#single-phenotype-association-workflow)
 * [Summary stat output](#summary-stat-output)
 * [Quick Manhattan and QQ plot](#quick-manhattan-and-qq-plot)
 
@@ -312,8 +313,8 @@ This allows us to take advantage of large cluster computing and parallel process
    7) `7_run_linreg3.py`
    8) `8_export_results.py`
 
-### Workflow for running association on a single phenotype using Hail
-Use the script `run_single_phenotype.py` to run an association on a single phenotype, using the same set of 337,199 UK Biobank samples and 10,894,596 variants described above. The script requires 6 parameters:
+### Single phenotype association workflow
+Use the script `run_single_phenotype.py` to run an association on a single phenotype using Hail v0.1, using the same set of 337,199 UK Biobank samples and 10,894,596 variants described above. The script requires 6 parameters:
  * `--bgens` - Google storage path to UKBB .bgen file(s) (can use "\*" to regex match).
  * `--sample` - Google storage path to application-specific .sample file.
  * `--fam` - Google storage path to headerless, application-specific .fam file.
