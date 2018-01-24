@@ -3,14 +3,14 @@
 # Table of Contents
 * [Goals](#goals) 
 * [Files](#files)
-* [UK Biobank Updates](#updates)
+* [UK Biobank Updates](#uk-biobank-updates)
 * [Phenotypes and applications](#phenotypes-and-applications)
   * [Phenotype output](#phenotype-output)
-  * [Phenotype to Genotype linking](#phenotype-genotype-linking)
+  * [Phenotype to Genotype linking](#phenotype-to-genotype-linking)
 * [Sample and Variant QC](#sample-and-variant-qc)
   * [Sample QC](#sample-qc)
-  * [Genotype QC](#variant-qc)
-* [Association in Hail](#hail-association)
+  * [Genotype QC](#genotype-qc)
+* [Association in Hail](#association-in-hail)
   * [Association Model](#association-model)
 * [Summary stat output](#summary-stat-output)
 * [Quick Manhattan and QQ plot](#quick-manhattan-and-qq-plot)
@@ -35,7 +35,10 @@
   * [6_filter_gwas_variants.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/6_filter_gwas_variants.py) - filter sites-only VDS to QC'ed SNPs
   * [7_run_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/7_run_linreg3.py) - run association with linreg3 command
   * [8_export_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/8_export_results.py) - export results to .tsv file
+  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Manhattan_plot.R) - create quick Manhattan plot in R from summary stat file
   * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - diagram of PHESANT phenotype curation strategy
+  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/QQ_plot.R) - create quick QQ plot in R from summary stat file
+  * [run_single_phenotype.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/run_single_phenotype.sh) - run a single phenotype through Hail on the Google cloud platform      
 
 ## UK Biobank Updates
 
