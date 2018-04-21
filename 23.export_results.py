@@ -57,6 +57,7 @@ kt_results = KeyTable.union(kt_results_auto, kt_results_chrX)
 kt_results = kt_results.annotate('variant = Variant(v.contig.replace("^0", ""), v.start, v.ref, v.alt())')
 kt_results = (kt_results.key_by('variant')
                         .order_by('variant')
+                        .filter('isDefined(va.AF)')
                         .drop('v')).cache()
 
 if pipeline_type == 'phesant':
@@ -65,9 +66,6 @@ if pipeline_type == 'phesant':
 elif pipeline_type == 'icd10':
     kt_phenosummary = hc.import_table('gs://ukb31063-mega-gwas/hail-0.1/phenotype-summaries/icd10/ukb31063.{0}.icd10.phenosummary.pipeline.{1:}.tsv'.format(sex, pipeline_number)).cache()
     phenotype_groups = group_phenotypes(kt_pipeline, block_type='single')
-elif pipeline_type == 'curated':
-    kt_phenosummary = hc.import_table('gs://ukb31063-mega-gwas/hail-0.1/phenotype-summaries/curated/ukb31063.{}.curated.tsv'.format(sex)).cache()
-    phenotype_groups = group_phenotypes(kt_pipeline, block_type='individual')
 elif pipeline_type == 'finngen':
     kt_phenosummary = hc.import_table('gs://ukb31063-mega-gwas/hail-0.1/phenotype-summaries/finngen/ukb31063.{0}.finngen.phenosummary.pipeline.{1:}.tsv'.format(sex, pipeline_number)).cache()
     phenotype_groups = group_phenotypes(kt_pipeline, block_type='single')
@@ -85,26 +83,19 @@ for i, group in enumerate(phenotype_groups):
                                          'pval = va.results[{0:}].pval[{1:}]'.format(i, j)])
         if pipeline_type == 'phesant':
             try:
-                n_cases = kt_phenosummary.query('`N.cases`.filter(x => FieldID == "{}").collect()')[0]
-            except IndexError:
+                n_cases = int(kt_phenosummary.query('`N.cases`.filter(x => FieldID == "{}").collect()'.format(code))[0])
+            except TypeError:
                 pass
             else:
-                kt_export = kt_export.annotate('expected_case_minor_AC = if (va.AF <= 0.5) va.AF * {0:}.toInt() else (1.0 - va.AF) * {0:}.toInt()'.format(n_cases))
+                kt_export = kt_export.annotate('expected_case_minor_AC = if (va.AF <= 0.5) 2.0 * va.AF * {0:}.toInt() else 2.0 * (1.0 - va.AF) * {0:}.toInt()'.format(n_cases))
         elif pipeline_type == 'icd10':
             n_cases = kt_phenosummary.query('n_cases.filter(x => code == "{}").collect()'.format(code))[0]
-            kt_export = kt_export.annotate('expected_case_minor_AC = if (va.AF <= 0.5) va.AF * {0:}.toInt() else (1.0 - va.AF) * {0:}.toInt()'.format(n_cases))
-        elif pipeline_type == 'curated':
-            try:
-                n_cases = kt_phenosummary.query('n_cases.filter(x => phenotype == "{}").collect()'.format(code))[0]
-            except IndexError:
-                pass
-            else:
-                kt_export = kt_export.annotate('expected_case_minor_AC = if (va.AF <= 0.5) va.AF * {0:}.toInt() else (1.0 - va.AF) * {0:}.toInt()'.format(n_cases))
+            kt_export = kt_export.annotate('expected_case_minor_AC = if (va.AF <= 0.5) 2.0 * va.AF * {0:}.toInt() else 2.0 * (1.0 - va.AF) * {0:}.toInt()'.format(n_cases))
         elif pipeline_type == 'finngen':
             n_cases = kt_phenosummary.query('n_cases.filter(x => code == "{}").collect()'.format(code))[0]
-            kt_export = kt_export.annotate('expected_case_minor_AC = if (va.AF <= 0.5) va.AF * {0:}.toInt() else (1.0 - va.AF) * {0:}.toInt()'.format(n_cases))
+            kt_export = kt_export.annotate('expected_case_minor_AC = if (va.AF <= 0.5) 2.0 * va.AF * {0:}.toInt() else 2.0 * (1.0 - va.AF) * {0:}.toInt()'.format(n_cases))
         kt_export = kt_export.drop('va')
-        kt_export.export('gs://ukb31063-mega-gwas/hail-0.1/results-tsvs/{0}.imputed_v3.results.{1}.tsv'.format(code, sex))
+        kt_export.export('gs://ukb31063-mega-gwas/hail-0.1/results-tsvs/{0}.imputed_v3.results.{1}.tsv.gz'.format(code, sex))
         count += 1
 
 print '#####################'

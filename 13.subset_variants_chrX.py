@@ -34,14 +34,7 @@ kt_qc_info = kt_qc.join(kt_mfi, how='inner')
 kt_vep_info = kt_vep.join(kt_mfi, how='inner')
 kt_join = kt_qc_info.join(kt_vep_info, how='outer')
 
-VariantDataset.from_table(kt_join).write('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.chrX.vds', overwrite=True)
-
-vds = hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.chrX.vds').annotate_variants_expr('va.keep = true')
-print 'nVariants: {:,}'.format(vds.count_variants())
-
-(vds.variants_table()
-    .select('v')
-    .export('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.chrX.tsv'))
+vds = VariantDataset.from_table(kt_join).annotate_variants_expr('va.keep = true').cache()
 
 (hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.imputed_v3.mfi.vds')
    .annotate_variants_vds(vds, expr='va.keep = vds.keep')
@@ -66,6 +59,12 @@ vds_vep = hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.vep.gwas_variant
 
 vds = (vds.annotate_variants_vds(vds_mfi, expr='va.rsid = vds.rsid, va.varid = vds.varid, va.info = vds.mfi.info')
           .annotate_variants_vds(vds_qc, expr='va.qc = vds.qc')
-          .annotate_variants_vds(vds_vep, root='va.vep'))
+          .annotate_variants_vds(vds_vep, root='va.vep')
+          .filter_variants_expr('isDefined(va.qc.AF)'))
 
-vds.write('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.chrX.with_qc_annotations.vds', overwrite=True)
+(vds.variants_table()
+    .select('v')
+    .export('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.chrX.tsv'))
+
+vds.write('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.chrX.vds', overwrite=True)
+print 'nVariants: {:,}'.format(hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.chrX.vds').count_variants())
