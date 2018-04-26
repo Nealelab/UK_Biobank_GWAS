@@ -33,14 +33,14 @@ Information and scripts from the previous  round of GWAS are available in the [i
 
 ### imputed-v3 Sample QC
 
-  * imputed-v3 parameters
+  * __imputed-v3 parameters__
 	* Used.in.pca.calculation filter (unrelated samples)
 	* sex chromosome aneuploidy filter
 	* Use provided PCs for European sample selection to determine British ancestry
 	  * Use 7 standard deviations away from the 1st 6 PCs
 	  * Further Filter to self-reported 'white-British' / 'Irish' / 'White'
 	* **QCed sample count: 361194 samples** 
-  * imputed-v2 parameters
+  * __imputed-v2 parameters__
     * Used.in.pca.calculation filter (unrelated samples)
     * sex chromosome aneuploidy filter
     * White.british.ancestry filter
@@ -48,7 +48,7 @@ Information and scripts from the previous  round of GWAS are available in the [i
 
 ### imputed-v3 Variant QC
 
-  * imputed-v3 parameters
+  * __imputed-v3 parameters__
     * Autosomes and X chromosome (but not pseudo-autosomal region or XY)
     * SNPs from HRC, UK10K, and 1KG imputation (~90 million)
     * INFO score > 0.8
@@ -56,7 +56,7 @@ Information and scripts from the previous  round of GWAS are available in the [i
 	  * Exception: VEP annotated Missense and PTV MAF > 1e-6
     * HWE p-value > 1e-10  
 	* **QCed SNP count: 13.7 million** 
-  * imputed-v2 parameters
+  * __imputed-v2 parameters__
     * Autosomes only
     * SNPs from HRC imputation (~40 million)
     * INFO score > 0.8
@@ -65,7 +65,7 @@ Information and scripts from the previous  round of GWAS are available in the [i
 
 ### imputed-v3 Association model
 
-  * imputed-v3 model
+  * __imputed-v3 model__
     * Linear regression model in Hail (linreg)
     * Three GWAS per phenotype
 	    * Both sexes
@@ -77,7 +77,7 @@ Information and scripts from the previous  round of GWAS are available in the [i
       * column name: expected_case_minor_AC
       * Used to filter out false-positive SNPs when case count is low
       * [Blog details here](http://www.nealelab.is/blog/2017/9/11/details-and-considerations-of-the-uk-biobank-gwas)  
-  * imputed-v2 model
+  * __imputed-v2 model__
     * Linear regression model in Hail (linreg)
     * Covariates: 1st 10 PCs + sex
 
