@@ -7,9 +7,14 @@
 
 ### Updates
 
-With the re-release of UK Biobank genotype imputation (which we term imputed-v3), we have generated an updated set of GWAS summary statistics for the genetics community. We have increased the number of phenotypes (our current application: UKB31063), inclusion of samples (see Sample QC changes), inclusion of SNPs (see Variant QC changes), and our association model (see Association model changes). Our largest change is the for all phenotypes, we have run a sex-specific GWAS analysis along with the full set.
+With the re-release of UK Biobank genotype imputation (which we term imputed-v3), we have generated an updated set of GWAS summary statistics for the genetics community. 
+  * Increased the number of phenotypes with application UKB31063 and addtl. custom curated phenotypes (see imputed-v3 Phenotypes)
+  * More liberal inclusion of samples (see imputed-v3 Sample QC)
+  * Inclusion of more SNPs (see imputed-v3 Variant QC)
+  * Updates to our association model (imputed-v3 Association model)
+Our largest change is that for all phenotypes, we have run a female-only and male-only GWAS along with the full set.
 
-Information and scripts from the previous  round of GWAS are available in the [imputed-v2-gwas](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas) subdirectory
+Information and scripts from the previous round of GWAS are available in the [imputed-v2-gwas](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas) subdirectory
 
 ### imputed-v3 Phenotypes
 
