@@ -3,7 +3,6 @@
 # Table of Contents
 * [Goals](#goals) 
 * [Files](#files)
-* [UK Biobank Updates](#uk-biobank-updates)
 * [Phenotypes and applications](#phenotypes-and-applications)
   * [Phenotype output](#phenotype-output)
   * [Phenotype to Genotype linking](#phenotype-to-genotype-linking)
@@ -15,6 +14,7 @@
   * [Single phenotype association workflow](#single-phenotype-association-workflow)
 * [Summary stat output](#summary-stat-output)
 * [Quick Manhattan and QQ plot](#quick-manhattan-and-qq-plot)
+* [UK Biobank Updates](#uk-biobank-updates)
 
 ## Goals:
 
@@ -40,47 +40,6 @@
   * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - diagram of PHESANT phenotype curation strategy
   * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/QQ_plot.R) - create quick QQ plot in R from summary stat file
   * [run_single_phenotype.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/run_single_phenotype.sh) - run a single phenotype through Hail on the Google cloud platform      
-
-## UK Biobank Updates
-
-**July 27th, 2017 - Errors in imputation identified**
-  * Imputation of non-HRC SNPs was mis-mapped. Email details below:
-
-*Dear researcher,  
-We have identified a problem with the UK Biobank imputed data and which has come to light following discussion via the UKB-GENETICS mail list.  
-This problem relates to the imputed data and does not affect the genotyped data from the Affymetrix array. 
-The genetic data was imputed using two different reference panels.  
-The Haplotype Reference Consortium (HRC) panel was used as first choice option, but for SNPs not in that reference panel the UK10K + 1000 Genomes panel was used.  
-The problem arose in the second set of imputed data from the UK10K + 1000 Genomes panel.  
-The genotypes at these SNPs are imputed correctly, but have not been recorded as having the correct genome position in the files.
-We have established that the imputed data from the HRC panel is not affected and has the correct positions.
-This is about ~40M sites and will include the majority of the common SNPs i.e. sites most likely to show genetic associations.
-These sites are readily identified since the HRC site list is public
-http://www.haplotype-reference-consortium.org/site  
-The problem is not easy to fix post-hoc, so we intend to re-impute the data from the UK10K + 1000 Genomes panel and re-release the imputed data.  
-For now we recommend that researchers focus exclusively on SNPs in the HRC panel, or work with the directly genotyped data until the new release is available.  
-We will progress the re-imputation as quickly as we can and expect to release a new version of the imputed files ideally in September.
-We will send more details about this data release and confirm timelines in due course. 
-We can only apologise that this error was not identified during the QA review and do not underestimate the frustration this will cause for the research community.  
-If you have any questions about this issue please send them to the UKB-GENETICS mail list to https://www.jiscmail.ac.uk/cgi-bin/webadmin?A0=UKB-GENETICS*
-
-*Kind regards,  
-UK Biobank & the Access Team*
-
-**July 26th, 2017 - Samples withdrawn from UK Biobank**
-  * 23 samples have withdrawn consent for use of their data
-  * 8 samples listed in imputed data sample file
-  * 6 samples identified as being part of our QC positive sample set
-
-*Dear Researcher,  
-As you are aware, participants are free to withdraw from UK Biobank at any time and request that their data no longer be used.  
-Since our last review, some participants involved with Application [XXXX] have requested that their data should no longer be used.  
-We have attached a file containing the anonymised IDs of these participants and any others who have withdrawn previously.  
-Please remove the corresponding records from your unpublished analyses.  
-Note that it is possible that this list contains IDs which you have never received as they may have withdrawn before your final dataset was generated.*
- 
-*Regards,  
-The UK Biobank Access Team*
 
 ## Phenotypes and applications
 
@@ -416,4 +375,45 @@ Rscript QQ_plot.R 2443.assoc.tsv.gz /home/user/graphs/2443
 ## generates: /home/user/graphs/2443_QQ.png file
 ```
 
+
+## UK Biobank Updates
+
+**July 27th, 2017 - Errors in imputation identified**
+  * Imputation of non-HRC SNPs was mis-mapped. Email details below:
+
+*Dear researcher,
+We have identified a problem with the UK Biobank imputed data and which has come to light following discussion via the UKB-GENETICS mail list.
+This problem relates to the imputed data and does not affect the genotyped data from the Affymetrix array.
+The genetic data was imputed using two different reference panels.
+The Haplotype Reference Consortium (HRC) panel was used as first choice option, but for SNPs not in that reference panel the UK10K + 1000 Genomes panel was used.
+The problem arose in the second set of imputed data from the UK10K + 1000 Genomes panel.
+The genotypes at these SNPs are imputed correctly, but have not been recorded as having the correct genome position in the files.
+We have established that the imputed data from the HRC panel is not affected and has the correct positions.
+This is about ~40M sites and will include the majority of the common SNPs i.e. sites most likely to show genetic associations.
+These sites are readily identified since the HRC site list is public
+http://www.haplotype-reference-consortium.org/site
+The problem is not easy to fix post-hoc, so we intend to re-impute the data from the UK10K + 1000 Genomes panel and re-release the imputed data.
+For now we recommend that researchers focus exclusively on SNPs in the HRC panel, or work with the directly genotyped data until the new release is available.
+We will progress the re-imputation as quickly as we can and expect to release a new version of the imputed files ideally in September.
+We will send more details about this data release and confirm timelines in due course.
+We can only apologise that this error was not identified during the QA review and do not underestimate the frustration this will cause for the research community.
+If you have any questions about this issue please send them to the UKB-GENETICS mail list to https://www.jiscmail.ac.uk/cgi-bin/webadmin?A0=UKB-GENETICS*
+
+*Kind regards,
+UK Biobank & the Access Team*
+
+**July 26th, 2017 - Samples withdrawn from UK Biobank**
+  * 23 samples have withdrawn consent for use of their data
+  * 8 samples listed in imputed data sample file
+  * 6 samples identified as being part of our QC positive sample set
+
+*Dear Researcher,
+As you are aware, participants are free to withdraw from UK Biobank at any time and request that their data no longer be used.
+Since our last review, some participants involved with Application [XXXX] have requested that their data should no longer be used.
+We have attached a file containing the anonymised IDs of these participants and any others who have withdrawn previously.
+Please remove the corresponding records from your unpublished analyses.
+Note that it is possible that this list contains IDs which you have never received as they may have withdrawn before your final dataset was generated.*
+
+*Regards,
+The UK Biobank Access Team*
 
