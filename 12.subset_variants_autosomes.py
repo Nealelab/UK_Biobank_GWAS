@@ -38,9 +38,9 @@ kt_join = kt_qc_info.join(kt_vep_info, how='outer')
 
 vds = VariantDataset.from_table(kt_join).annotate_variants_expr('va.keep = true').cache()
 
-#VariantDataset.from_table(kt_join).write('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.vds', overwrite=True)
-#vds = hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.vds').annotate_variants_expr('va.keep = true')
-#print 'nVariants: {:,}'.format(vds.count_variants())
+VariantDataset.from_table(kt_join).write('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.vds', overwrite=True)
+vds = hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.vds').annotate_variants_expr('va.keep = true')
+print 'nVariants: {:,}'.format(vds.count_variants())
 
 (VariantDataset.from_table(hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.imputed_v3.mfi.vds')
                              .variants_table()
@@ -77,7 +77,7 @@ vds = (vds.annotate_variants_vds(vds_mfi, expr='va.rsid = vds.rsid, va.varid = v
 (vds.variants_table()
     .select('v')
     .annotate('v = Variant(v.contig.replace("^0", ""), v.start, v.ref, v.alt())')
-    .export('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.test.tsv'))
+    .export('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.tsv'))
 
 vds.write('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.vds', overwrite=True)
 print 'nVariants: {:,}'.format(hc.read('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_variants.autosomes.vds').count_variants())

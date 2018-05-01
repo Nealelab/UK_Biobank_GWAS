@@ -12,8 +12,8 @@ vds = vds.annotate_variants_expr("""va.minor_allele = if (va.qc.AF <= 0.5) v.alt
 
 vds.export_variants('gs://ukb31063-mega-gwas/hail-0.1/annotations/variants.tsv.gz',
     """
-    variant = v,
-    contig = v.contig,
+    variant = Variant(v.contig.replace("^0", ""), v.start, v.ref, v.alt()),
+    contig = v.contig.replace("^0", ""),
     pos = v.start,
     ref = v.ref,
     alt = v.alt(),
