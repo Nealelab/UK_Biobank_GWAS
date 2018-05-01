@@ -65,13 +65,10 @@ kt_hm3 = kt_hm3.select('v').key_by('v')
 kt_join = kt_results.join(kt_hm3, how='inner').cache()
 
 if pipeline_type == 'phesant':
-    kt_phenosummary = hc.import_table('gs://ukb31063-mega-gwas/hail-0.1/phenotype-summaries/phesant/ukb31063.{0}.phenosummary.*.tsv'.format(sex)).cache()
     phenotype_groups = group_phenotypes(kt_pipeline, block_type='mix')
 elif pipeline_type == 'icd10':
-    kt_phenosummary = hc.import_table('gs://ukb31063-mega-gwas/hail-0.1/phenotype-summaries/icd10/ukb31063.{0}.icd10.phenosummary.pipeline.{1:}.tsv'.format(sex, pipeline_number)).cache()
     phenotype_groups = group_phenotypes(kt_pipeline, block_type='single')
 elif pipeline_type == 'finngen':
-    kt_phenosummary = hc.import_table('gs://ukb31063-mega-gwas/hail-0.1/phenotype-summaries/finngen/ukb31063.{0}.finngen.phenosummary.pipeline.{1:}.tsv'.format(sex, pipeline_number)).cache()
     phenotype_groups = group_phenotypes(kt_pipeline, block_type='single')
 
 count = 1
