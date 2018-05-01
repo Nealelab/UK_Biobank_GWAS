@@ -1,4 +1,10 @@
 
+# example submission:
+# $ cluster submit mycluster 26.export_ldsc_sumstats.py --args "both_sexes phesant 1"
+
+# need enough workers to cache in memory for optimal export speed (used 15 for export of GWAS results with 13M variants, 
+# could probably get away with 2-4 workers for 1M ldsc variants)
+
 import sys
 from hail import *
 hc = HailContext()
