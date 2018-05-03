@@ -60,7 +60,7 @@ kt_results = (kt_results.key_by('variant')
                         .filter('isDefined(va.AF)')
                         .drop('v'))
 
-kt_hm3 = hc.read_table('gs://ukb31063-mega-gwas/ldsc/ld_ref_panel/hm3.r3.b37.auto_bi_af.ukbb_gwas_qcpos.kt')
+kt_hm3 = hc.read_table('gs://ukb31063-mega-gwas/ldsc/ld_ref_panel/hm3.r3.b37.auto_bi_af.ukbb_gwas_qcpos.no_mhc.kt')
 kt_hm3 = kt_hm3.select('v').key_by('v')
 kt_join = kt_results.join(kt_hm3, how='inner').cache()
 
