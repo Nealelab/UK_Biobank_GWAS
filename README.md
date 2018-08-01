@@ -18,11 +18,29 @@ Information and scripts from the previous round of GWAS are available in the [im
 
 ### imputed-v3 Phenotypes
 
-  * 2455 auto-curated phenotypes using PHESANT: 
+  * Auto-curated phenotypes using PHESANT: 
     * Source repository: https://github.com/MRCIEU/PHESANT
     * Customized PHESANT repository: https://github.com/astheeggeggs/PHESANT
-  * 806 ICD10 codes
-  * 694 curated phenotypes in collaboration with the [FinnGen consortium](https://www.finngen.fi/)
+  * ICD10 codes (all non-coded individuals treated as controls)
+  * Curated phenotypes in collaboration with the [FinnGen consortium](https://www.finngen.fi/)
+
+  * Phenotypes in both sexes
+    * PHESANT: 2891 total (274 continuous / 271 ordinal / 2346 binary)
+    * ICD10: 633 binary
+    * FinnGen curated: 559
+
+  * Phenotypes in females
+    * PHESANT: 2393 total (259 continuous / 257 ordinal / 1877 binary)
+    * ICD10: 482 binary
+    * FinnGen curated: 412
+
+  * Phenotypes in males   
+    * PHESANT: 2305 total (262 continuous / 259 ordinal / 1784 binary)
+    * ICD10: 439 binary
+    * FinnGen curated: 400
+
+  * Unique PHESANT phenotypes: 3011, of which 274 are continuous
+  * 4203 total unique phenotypes: 3011 PHESANT + 559 finngen + 633 ICD10
 
   * Summary files: 
 	* **phenotypes.both_sexes.tsv.gz** 
