@@ -28,18 +28,18 @@
 
 ## Files
 
-  * [1_merge_mfi.sh](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/1_merge_mfi.sh) - merge UKBB mfi files
-  * [2_fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/fam_sqc_merge.R) - merge ukb_sqc_v2.txt to application-specific .fam file
-  * [3_make_sample_qc_table.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/3_make_sample_qc_table.py) - make application-specific qc key table
-  * [4_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/4_build_pipelines.py) - set up block of phenotypes to be analyzed
-  * [5_make_variant_annotation_vds.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/5_make_variant_annotation_vds.py) - create sites-only VDS of all SNPs
-  * [6_filter_gwas_variants.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/6_filter_gwas_variants.py) - filter sites-only VDS to QC'ed SNPs
-  * [7_run_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/7_run_linreg3.py) - run association with linreg3 command
-  * [8_export_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/8_export_results.py) - export results to .tsv file
-  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Manhattan_plot.R) - create quick Manhattan plot in R from summary stat file
-  * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf) - diagram of PHESANT phenotype curation strategy
-  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/QQ_plot.R) - create quick QQ plot in R from summary stat file
-  * [run_single_phenotype.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/run_single_phenotype.sh) - run a single phenotype through Hail on the Google cloud platform      
+  * [1_merge_mfi.sh](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/1_merge_mfi.sh) - merge UKBB mfi files
+  * [2_fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/fam_sqc_merge.R) - merge ukb_sqc_v2.txt to application-specific .fam file
+  * [3_make_sample_qc_table.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/3_make_sample_qc_table.py) - make application-specific qc key table
+  * [4_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/4_build_pipelines.py) - set up block of phenotypes to be analyzed
+  * [5_make_variant_annotation_vds.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/5_make_variant_annotation_vds.py) - create sites-only VDS of all SNPs
+  * [6_filter_gwas_variants.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/6_filter_gwas_variants.py) - filter sites-only VDS to QC'ed SNPs
+  * [7_run_linreg3.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/7_run_linreg3.py) - run association with linreg3 command
+  * [8_export_results.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/8_export_results.py) - export results to .tsv file
+  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/Manhattan_plot.R) - create quick Manhattan plot in R from summary stat file
+  * [PHESANT_pipeline.pdf](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/PHESANT_pipeline.pdf) - diagram of PHESANT phenotype curation strategy
+  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/QQ_plot.R) - create quick QQ plot in R from summary stat file
+  * [run_single_phenotype.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/run_single_phenotype.sh) - run a single phenotype through Hail on the Google cloud platform      
 
 ## Phenotypes and applications
 
@@ -58,7 +58,7 @@
       * Altered the variable-list file `variable-info/outcome_info_final.tsv` to restrict to the phenotypes we wish to analyze - see 'EXCLUDED' column
       * Added data codings tables from UK biobank data showcase to allow mapping from original encoding in phenotype file (e.g. 1 = 'bungalow', 2 = 'flat' etc)
       * Added additional scripts for creation of simple test plots and summary tables
-      * [PHESANT phenotype curation strategy](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/PHESANT_pipeline.pdf)
+      * [PHESANT phenotype curation strategy](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/PHESANT_pipeline.pdf)
 
 **Example PHESANT script**
 ```
@@ -98,7 +98,7 @@ generates an output file. Finally, run `get_hists_and_notes` followed by `includ
   * Both files have the same IDs
   	* The .fam file is ordered the same way as the ukb_sqc_v2.txt file
   	* The .sample file is ordered the same way as the .bgen file
-  * [R Script](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/2_fam_sqc_merge.R) for linking application-specific .fam file and ukb_sqc_v2.txt file
+  * [R Script](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/2_fam_sqc_merge.R) for linking application-specific .fam file and ukb_sqc_v2.txt file
 
 **Current list of participating UK Biobank Applications**
 
@@ -347,7 +347,7 @@ variant		rsid		nCompleteSamples	AC	ytx		beta		se		tstat		pval
 
 **R Scripts to generate basic Manhattan and QQ plots on a single summary stat file**
 
-  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Manhattan_plot.R)
+  * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/Manhattan_plot.R)
     * Creates manhattan plot on SNPs with p < .001
     * Requires > 1 Gb memory to read in summary stat file
    * Example usage:
@@ -361,7 +361,7 @@ Rscript Manhattan_plot.R 2443.assoc.tsv.gz /home/user/graphs/2443
 ## generates: /home/user/graphs/2443_Manhattan.png file
 ```
 
-  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/QQ_plot.R)
+  * [QQ_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/QQ_plot.R)
     * Creates QQ plot on all SNPs                    
     * Requires > 1 Gb memory to read in summary stat file
    * Example usage:
@@ -416,4 +416,5 @@ Note that it is possible that this list contains IDs which you have never receiv
 
 *Regards,
 The UK Biobank Access Team*
+
 
