@@ -349,7 +349,6 @@ variant		rsid		nCompleteSamples	AC	ytx		beta		se		tstat		pval
 
   * [Manhattan_plot.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Manhattan_plot.R)
     * Creates manhattan plot on SNPs with p < .001
-    * Requires > 1 Gb memory to read in summary stat file
    * Example usage:
 ```
 ## generic example:
