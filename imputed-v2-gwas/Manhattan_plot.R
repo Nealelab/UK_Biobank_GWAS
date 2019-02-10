@@ -107,8 +107,10 @@ args <- commandArgs(TRUE)
 stats <- args[1] ## summary stat file
 output <- args[2] ## output name
 
-gwas <- fread(paste0('zcat ',stats),h=T,stringsAsFactors=F)
-
+## subset to significant hits
+## and desired columns
+awkcmd = 'awk \'NR==1 { for (i=1; i<=NF; i++) {f[$i] = i} } { if(NR==1 || $f["pval"] < 0.001) {print $f["variant"], $f["pval"]} }\''
+gwas <- fread(paste("gunzip -c",stats,"|",awkcmd),h=T,stringsAsFactors=F)
 
 
 ## ==== part 3: plot summary stats
@@ -116,14 +118,11 @@ gwas <- fread(paste0('zcat ',stats),h=T,stringsAsFactors=F)
 
 ## ------ Manhattan plot
 
-## subset to significant hits
-gwas2 <- subset(gwas,gwas$pval < 0.001)
-
 ## Just keep CHR, BP, and P
-tmp <- strsplit(gwas2$variant,':',fixed=T)
+tmp <- strsplit(gwas$variant,':',fixed=T)
 CHR <- as.numeric(sapply(tmp,'[',1))
 BP <- as.numeric(sapply(tmp,'[',2))
-P <- gwas2$pval
+P <- gwas$pval
 P[is.na(P)] <- 1
 
 gwas3 <- cbind.data.frame(CHR,BP,P)
