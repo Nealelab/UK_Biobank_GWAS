@@ -1,3 +1,0 @@
-
-import hail as hl
-
