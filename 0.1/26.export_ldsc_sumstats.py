@@ -46,9 +46,9 @@ def group_phenotypes(kt, block_type):
                 phenotype_groups[idx][1].append(code)
     return phenotype_groups
 
-pipeline_path = 'gs://ukb31063-mega-gwas/hail-0.1/phenotype-pipelines/{0}/ukb31063.{1}.{0}.pipeline.{2}.kt'.format(pipeline_type, sex, pipeline_number)
-results_auto_path = 'gs://ukb31063-mega-gwas/hail-0.1/results-tables/{0}/ukb31063.{1}.{0}.autosomes.pipeline.{2}.kt'.format(pipeline_type, sex, pipeline_number)
-results_chrX_path = 'gs://ukb31063-mega-gwas/hail-0.1/results-tables/{0}/ukb31063.{1}.{0}.chrX.pipeline.{2}.kt'.format(pipeline_type, sex, pipeline_number)
+pipeline_path = 'gs://ukb31063-mega-gwas/phenotype-pipelines/{0}/ukb31063.{1}.{0}.pipeline.{2}.kt'.format(pipeline_type, sex, pipeline_number)
+results_auto_path = 'gs://ukb31063-mega-gwas/results-tables/{0}/ukb31063.{1}.{0}.autosomes.pipeline.{2}.kt'.format(pipeline_type, sex, pipeline_number)
+results_chrX_path = 'gs://ukb31063-mega-gwas/results-tables/{0}/ukb31063.{1}.{0}.chrX.pipeline.{2}.kt'.format(pipeline_type, sex, pipeline_number)
 
 kt_pipeline = hc.read_table(pipeline_path)
 kt_results_auto = hc.read_table(results_auto_path)
@@ -81,7 +81,7 @@ for i, group in enumerate(phenotype_groups):
                                       'N = va.results[{:}].nCompleteSamples'.format(i),
                                       'Z = va.results[{0:}].tstat[{1:}]'.format(i, j)])
         kt_export = kt_export.select(['SNP', 'A1', 'A2', 'N', 'Z'])
-        kt_export.export('gs://ukb31063-mega-gwas/hail-0.1/ldsc-sumstats-tsvs/{0}.imputed_v3.ldsc.{1}.tsv.gz'.format(code, sex))
+        kt_export.export('gs://ukb31063-mega-gwas/ldsc-sumstats-tsvs/{0}.imputed_v3.ldsc.{1}.tsv.gz'.format(code, sex))
         count += 1
 
 print '#####################'

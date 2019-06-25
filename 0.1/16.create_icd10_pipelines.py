@@ -19,9 +19,9 @@ kt = kt.annotate('set_of_codes = set_of_codes.remove("")')
 kt = kt.select(['s', 'set_of_codes'])
 
 kts = {
-    'both_sexes': kt.join(hc.read_table('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_samples.kt'), how='inner').cache(),
-    'female': kt.join(hc.read_table('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_samples.females.kt'), how='inner').cache(),
-    'male': kt.join(hc.read_table('gs://ukb31063-mega-gwas/hail-0.1/qc/ukb31063.gwas_samples.males.kt'), how='inner').cache()
+    'both_sexes': kt.join(hc.read_table('gs://ukb31063-mega-gwas/qc/ukb31063.gwas_samples.kt'), how='inner').cache(),
+    'female': kt.join(hc.read_table('gs://ukb31063-mega-gwas/qc/ukb31063.gwas_samples.females.kt'), how='inner').cache(),
+    'male': kt.join(hc.read_table('gs://ukb31063-mega-gwas/qc/ukb31063.gwas_samples.males.kt'), how='inner').cache()
 }
 
 codes = {
@@ -43,6 +43,6 @@ for sex, code_list in codes.iteritems():
 
         kt_pipeline = kts[sex].annotate(['{0} = set_of_codes.contains("{0}")'.format(x) for x in cg])
         kt_pipeline = kt_pipeline.drop('set_of_codes')
-        kt_pipeline.write('gs://ukb31063-mega-gwas/hail-0.1/phenotype-pipelines/icd10/ukb31063.{0}.icd10.pipeline.{1:}.kt'.format(sex, current_pipeline), overwrite=True)
+        kt_pipeline.write('gs://ukb31063-mega-gwas/phenotype-pipelines/icd10/ukb31063.{0}.icd10.pipeline.{1:}.kt'.format(sex, current_pipeline), overwrite=True)
 
         current_pipeline += 1
