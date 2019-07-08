@@ -76,7 +76,7 @@ Information and scripts from the previous round of GWAS are available in the [im
     * SNPs from HRC, UK10K, and 1KG imputation (~90 million)
     * INFO score > 0.8
     * MAF > 0.0001
-	  * Exception: VEP annotated Missense and PTV MAF > 1e-6
+	  * Exception: VEP annotated coding (PTV/Missense/Synonymous) MAF > 1e-6
     * HWE p-value > 1e-10  
 	* **QCed SNP count: 13.7 million** 
   * __imputed-v2 parameters__
