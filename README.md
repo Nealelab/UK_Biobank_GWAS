@@ -17,14 +17,14 @@ Our largest change is that for all phenotypes, we have run a female-only and mal
 
 Information and scripts from the previous round of GWAS are available in the [imputed-v2-gwas](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas) subdirectory
 
-### Changelog
+### Change log
 
-Any updates to the Rapid GWAS summary statistics or Manifest will be recorded here:
+Updates to the Rapid GWAS summary statistics or download Manifest will be recorded here:
 
- * Oct 9, 2019
+ * _Oct 9, 2019_
    * Summary statistics identified where low confidence filter was mis-applied 
    * [Issue details here](https://github.com/Nealelab/UK_Biobank_GWAS/issues/20)
-   * [List of files affected](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/GWAS_list_low_confidence_filter_update.txt.gz)
+   * List of files affected (111 files): GWAS_list_low_confidence_filter_update.txt.gz
    * File column description:
      * phenotype = phenotype number
      * description = UK Biobank description of phenotype
@@ -35,7 +35,7 @@ Any updates to the Rapid GWAS summary statistics or Manifest will be recorded he
      * n_missing = number of samples without phenotype information
      * tsv_requires_update = TRUE/FALSE does the file require updating of low confidence filter? (phenotypes where min_category < 12500 requires updating) 
 
- * Sept 16, 2019
+ * _Sept 16, 2019_
    * GWAS summary statistics of Biomarkers now available
    * 34 biomarker meaurements tested
    * [Blog details here](http://www.nealelab.is/blog/2019/9/16/biomarkers-gwas-results)
