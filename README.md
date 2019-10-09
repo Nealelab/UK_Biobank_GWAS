@@ -1,5 +1,6 @@
 # Table of Contents
 * [Updates](#updates) 
+* [Change Log](#change-log)
 * [imputed-v3 Phenotypes](#imputed-v3-phenotypes)
 * [imputed-v3 Sample QC](#imputed-v3-sample-qc)
 * [imputed-v3 Variant QC](#imputed-v3-variant-qc)
@@ -15,6 +16,31 @@ With the re-release of UK Biobank genotype imputation (which we term imputed-v3)
 Our largest change is that for all phenotypes, we have run a female-only and male-only GWAS along with the full set.
 
 Information and scripts from the previous round of GWAS are available in the [imputed-v2-gwas](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas) subdirectory
+
+### Changelog
+
+Any updates to the Rapid GWAS summary statistics or Manifest will be recorded here:
+
+ * Oct 9, 2019
+   * Summary statistics identified where low confidence filter was mis-applied 
+   * [Issue details here](https://github.com/Nealelab/UK_Biobank_GWAS/issues/20)
+   * [List of files affected](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/GWAS_list_low_confidence_filter_update.txt.gz)
+   * File column description:
+     * phenotype = phenotype number
+     * description = UK Biobank description of phenotype
+     * min_category = smallest category defined by PHESANT
+     * max_category = largest category defined by PHESANT
+     * category_distribution = sample counts across categories split by '|'
+     * additive_tsvs_list_name = GWAS summary statistic filename
+     * n_missing = number of samples without phenotype information
+     * tsv_requires_update = TRUE/FALSE does the file require updating of low confidence filter? (phenotypes where min_category < 12500 requires updating) 
+
+ * Sept 16, 2019
+   * GWAS summary statistics of Biomarkers now available
+   * 34 biomarker meaurements tested
+   * [Blog details here](http://www.nealelab.is/blog/2019/9/16/biomarkers-gwas-results)
+
+
 
 ### imputed-v3 Phenotypes
 
