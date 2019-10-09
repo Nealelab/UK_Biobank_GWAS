@@ -24,7 +24,7 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
  * _Oct 9, 2019_
    * Summary statistics identified where low confidence filter was mis-applied 
    * [Issue details here](https://github.com/Nealelab/UK_Biobank_GWAS/issues/20)
-   * List of files affected (111 files): GWAS_list_low_confidence_filter_update.txt.gz
+   * List of files affected (111 files): (GWAS_list_low_confidence_filter_update.txt.gz)[https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/GWAS_list_low_confidence_filter_update.txt.gz]
    * File column description:
      * phenotype = phenotype number
      * description = UK Biobank description of phenotype
@@ -33,7 +33,10 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
      * category_distribution = sample counts across categories split by '|'
      * additive_tsvs_list_name = GWAS summary statistic filename
      * n_missing = number of samples without phenotype information
-     * tsv_requires_update = TRUE/FALSE does the file require updating of low confidence filter? (phenotypes where min_category < 12500 requires updating) 
+     * tsv_requires_update = TRUE/FALSE does the file require updating of low confidence filter? (phenotypes where min_category < 12500 requires updating)
+   * R script to update summary statistic files (Rapid_GWAS_low_confidence_filter_update.R)[https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/Rapid_GWAS_low_confidence_filter_update.R]
+     * Requires data.table 1.12.2 R package
+     * Requires GWAS_list_low_confidence_filter_update.txt.gz file (or subsetted version with only files you want to update) 
 
  * _Sept 16, 2019_
    * GWAS summary statistics of Biomarkers now available
