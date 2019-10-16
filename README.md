@@ -123,7 +123,7 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
 	    * Both sexes
 	    * Female only
 	    * Male only
-    * Covariates: 1st 20 PCs + sex + age + age^2 + sex*age + sex*age2
+    * Covariates: 1st 20 PCs + sex + age + age^2 + sex\*age + sex\*age2
     * Sex-specific covariates: 1st 20 PCs + age + age^2 
     * Extra column for variant confidence in case/control phenotypes
       * column name: expected_case_minor_AC
