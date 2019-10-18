@@ -21,10 +21,14 @@ Information and scripts from the previous round of GWAS are available in the [im
 
 Updates to the Rapid GWAS summary statistics or download Manifest will be recorded here:
 
+ * _Oct 17th, 2019_
+   * 89 summary stat files affected by mis-applied low confidence filter have been updated and uploaded to the public release (File Manifest Release 20180731)  
+
  * _Oct 9, 2019_
    * Summary statistics identified where low confidence filter was mis-applied 
    * [Issue details here](https://github.com/Nealelab/UK_Biobank_GWAS/issues/20)
    * List of files affected (111 files): (GWAS_list_low_confidence_filter_update.txt.gz)[https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/GWAS_list_low_confidence_filter_update.txt.gz]
+   * Of these 111 files, 89 require updating, as 22 files are unchanged with the application of updated filter 
    * File column description:
      * phenotype = phenotype number
      * description = UK Biobank description of phenotype
