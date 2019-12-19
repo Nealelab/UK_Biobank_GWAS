@@ -17,7 +17,7 @@ Our largest change is that for all phenotypes, we have run a female-only and mal
 
 Information and scripts from the previous round of GWAS are available in the [imputed-v2-gwas](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas) subdirectory
 
-Finally, the (0.1)[https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.1] and [0.2]([https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.2) script repositories refer to the version of Hail used to run the GWAS 
+Finally, the [0.1](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.1) and [0.2](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.2) script repositories refer to the version of Hail used to run the GWAS 
 
 
 ### Change log
