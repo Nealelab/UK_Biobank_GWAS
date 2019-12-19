@@ -17,6 +17,9 @@ Our largest change is that for all phenotypes, we have run a female-only and mal
 
 Information and scripts from the previous round of GWAS are available in the [imputed-v2-gwas](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas) subdirectory
 
+Finally, the (0.1)[https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.1] and [0.2]([https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.2) script repositories refer to the version of Hail used to run the GWAS 
+
+
 ### Change log
 
 Updates to the Rapid GWAS summary statistics or download Manifest will be recorded here:
@@ -108,7 +111,7 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
     * Autosomes and X chromosome (but not pseudo-autosomal region or XY)
     * SNPs from HRC, UK10K, and 1KG imputation (~90 million)
     * INFO score > 0.8
-    * MAF > 0.0001
+    * MAF > 0.001
 	  * Exception: VEP annotated coding (PTV/Missense/Synonymous) MAF > 1e-6
     * HWE p-value > 1e-10  
 	* **QCed SNP count: 13.7 million** 
@@ -116,7 +119,7 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
     * Autosomes only
     * SNPs from HRC imputation (~40 million)
     * INFO score > 0.8
-    * MAF > 0.0001
+    * MAF > 0.001
 	* **QCed SNP count: 10.9 million** 
 
 ### imputed-v3 Association model
