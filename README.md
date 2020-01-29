@@ -108,7 +108,7 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
 ### imputed-v3 Variant QC
 
   * __imputed-v3 parameters__
-    * Autosomes and X chromosome (but not pseudo-autosomal region or XY)
+    * Autosomes and X chromosome (including pseudo-autosomal region or XY)
     * SNPs from HRC, UK10K, and 1KG imputation (~90 million)
     * INFO score > 0.8
     * MAF > 0.001
@@ -120,6 +120,7 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
     * SNPs from HRC imputation (~40 million)
     * INFO score > 0.8
     * MAF > 0.001
+    * HWE p-value > 1e-10
 	* **QCed SNP count: 10.9 million** 
 
 ### imputed-v3 Association model
