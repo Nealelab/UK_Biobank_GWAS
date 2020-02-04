@@ -29,7 +29,7 @@
 ## Files
 
   * [1_merge_mfi.sh](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/1_merge_mfi.sh) - merge UKBB mfi files
-  * [2_fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/fam_sqc_merge.R) - merge ukb_sqc_v2.txt to application-specific .fam file
+  * [2_fam_sqc_merge.R](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/2_fam_sqc_merge.R) - merge ukb_sqc_v2.txt to application-specific .fam file
   * [3_make_sample_qc_table.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/3_make_sample_qc_table.py) - make application-specific qc key table
   * [4_build_pipelines.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/4_build_pipelines.py) - set up block of phenotypes to be analyzed
   * [5_make_variant_annotation_vds.py](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/imputed-v2-gwas/5_make_variant_annotation_vds.py) - create sites-only VDS of all SNPs
