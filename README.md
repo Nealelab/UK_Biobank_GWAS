@@ -1,3 +1,5 @@
+### We are currently experiencing issues with our DropBox account and working on a fix.  We appreciate your patience during this time
+
 # Table of Contents
 * [Updates](#updates) 
 * [Change Log](#change-log)
@@ -23,6 +25,10 @@ Finally, the [0.1](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.1) 
 ### Change log
 
 Updates to the Rapid GWAS summary statistics or download Manifest will be recorded here:
+
+ * _January, 2021_
+   * We are currently experiencing issues with our DropBox account and working on a fix.  We appreciate your patience during this time  
+
 
  * _Oct 17th, 2019_
    * 89 summary stat files affected by mis-applied low confidence filter have been updated and uploaded to the public release (File Manifest Release 20180731)  
