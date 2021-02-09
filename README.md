@@ -1,4 +1,4 @@
-### We are currently experiencing issues with our DropBox account and working on a fix.  We appreciate your patience during this time
+### V3 Summary statistics are [now available for download on Amazon Web Services](https://docs.google.com/spreadsheets/d/1kvPoupSzsSFBNSztMzl04xMoSC3Kcx3CrjVf4yBmESU/edit?usp=sharing) 
 
 # Table of Contents
 * [Updates](#updates) 
