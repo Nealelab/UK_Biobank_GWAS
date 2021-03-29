@@ -1,0 +1,205 @@
+This file is a description of the data sets that are available as part of the UK Biobank genotype and imputed data release. Where a file is in a standard format links are given to the format description otherwise explicit format information is given.
+
+This description was created 16 Feb 2018.
+
+
+Calls
+=====
+The genotype calls are in binary PLINK format (.bed, .bim, .fam) see https://www.cog-genomics.org/plink/1.9/formats for details of the formats.
+The BIM file determines the order of markers in the calls and all of the other genotype data sets. The SNP_id is the rsid where it is available or the Affymetrix_SNP_id otherwise. The positions are in GRCh37 coordinates.
+The FAM file determines the order of samples in the calls and all of the other genotype data sets. The FAM file includes 'Batch' in the Phenotype field (6th column).   
+
+
+Marker-QC
+=========
+This file contains useful information about the SNPs and Indels in the data set. It is a plaintext file with space separated columns.
+
+rs_id	  	   	  string      rs_id (or affymetrix_snp_id if no rsid is available)
+affymetrix_snp_id	  string      id for marker from Affymetrix array definition 
+affymetrix_probeset_id	  string      id for probeset from Affymetrix array definition
+chromosome		  numeric     Numeric chromosome label 1-26; 23=X,24=Y,25=XY,26=MT
+position		  numeric     Physical position of start of marker/Indel in GRCh37 coordinates
+allele1_ref		  string      Allele1 in the genotypes calls, aligned to ref allele
+allele2_alt		  string      Allele2 in the genotypes calls, aligned to alt allele
+strand			  string      Always '+' from Affymetrix array definition
+array			  (0/1/2)     Presence of marker on genotyping arrays 0=ukbl, 1=ukbb, 2=both
+BATCH_qc		  (0/1)	      (no/yes) For each batch (Batch_b001-b095,UKBiLEVEAX_b1-b11), marker passed all QC tests
+in_HetMiss		  (0/1)	      (no/yes) Marker was used in the calculation of heterozygosity and missingness
+in_Relatedness		  (0/1)	      (no/yes) Marker was used in the calculation of kinship
+in_PCA			  (0/1)	      (no/yes) Marker was used in the calculation of sample PCA
+PC_loading		  numeric     PCA snp_loadings for each of PC1-PC40
+in_Phasing_Input	  (0/1)       (no/yes) Marker was in the input for phasing
+
+
+Sample-QC
+=========
+This file contains information about the samples in the data set.
+The samples are in the same order as the calls FAM file. It is a plaintext file with space separated columns.
+
+NOTE: there are currently 2 versions of this file in circulation. The newer
+version is described below and contains column headers on the first row.
+The older (deprecated) version lacks the column headers and has two
+additional Affymetrix internal values prefixing the columns listed below.
+
+genotyping.array   	  	      string	Indicates which array the DNA sample was typed on. UKBL=UK BiLEVE and UKBB=UK Biobank
+Batch		   		      string    Indicates in which batch Affymetrix called the genotypes for this sample. See Affymetrix documentation for details.
+Plate.Name	   		      string	Indicates on which plate Affymetrix processed this sample. See Affymetrix documentation for details.
+Well		   		      string	Indicates in which well Affymetrix processed sample. See Affymetrix documentation for details.
+Cluster.CR	   		      numeric	Affymetrix quality control metric. Corresponds to sample-specific call rate for each individual, computed using probesets internal to Affymetrix. See Affymetrix SNP-polisher documentation for details.
+dQC 		   		      numeric	Affymetrix quality control metric. Measures the resolution of the distributions of intensity 'contrast' values, based on intensities of probe sequences for non-polymorphic genome locations. See Affymetrix SNP-polisher documentation for details. Note that values are rounded to 2 decimal places for individuals type on the UK Biobank array, and 5 decimal places for individuals typed on the UK BiLEVE array.
+Internal.Pico..ng.uL.		      numeric	Affymetrix quality control metric. Measure of DNA concentration in sample. See Affymetrix documentation for details.
+Submitted.Gender		      string	Gender submitted by participant. Should match UKBiobank phenotype field 'Sex'.
+Inferred.Gender			      string	Sex as determined by Affymetrix, and used in calling genotypes on the Y chromosome and the sex-specific region of the X chromosome. See Affymetrix documentation for details.
+X.intensity			      numeric	Affymetrix metric used for determining sex. Measures average probe intensity on a set of non-polymorphic probes on the X chromosome. Note this set of probes are not in the genotype calls.
+Y.intensity			      numeric	Affymetrix metric used for determining sex. Measures average probe intensity on a set of non-polymorphic probes on the Y chromosome. Note this set of probes are not in the genotype calls.
+Submitted.Plate.Name		      string	Indicates on which plate the DNA sample was delivered to Affymetrix. See UKBiobank DNA processing documentation for details.
+Submitted.Well			      string	Indicates in which well the DNA sample was delivered to Affymetrix. See UKBiobank DNA processing documentation for details.
+sample.qc.missing.rate		      numeric	Missing rate of each sample based on a set of high-quality markers. This metric was used to identify outliers based on heterozygosity and missing rates (het.missing.outliers). See genotype QC documentation for details.
+heterozygosity			      numeric	Heterozygosity across a set of high-quality markers. See genotype QC documentation for details.
+heterozygosity.pc.corrected 	      numeric	Heterozygosity after adjusting for ancestry using principal components. This metric was used to identify outliers based on heterozygosity and missing rates (het.missing.outliers). See genotype QC documentation for details.
+het.missing.outliers		      (0/1)	(no/yes) Indicates samples identified as outliers in heterozygosity and missing rates, which indicates poor-quality genotypes for these samples.
+putative.sex.chromosome.aneuploidy    (0/1)	(no/yes) Indicates samples identified as putatively carrying sex chromosome configurations that are not either XX or XY. These were identified by looking at average log2Ratios for Y and X chromosomes. See genotype QC documentation for details.
+in.kinship.table		      (0/1)	(no/yes) Indicates samples which have at least one relative among the set of genotyped individuals. These are exactly the set of samples that appear in the kinship table. See genotype QC documentation for details.
+excluded.from.kinship.inference	      (0/1)	(no/yes) Indicates samples which were excluded from the kinship inference procedure. See genotype QC documentation for details.
+excess.relatives		      (0/1)	(no/yes) Indicates samples which have more than 10 putative third-degree relatives in the kinship table.
+in.white.British.ancestry.subset      (0/1)	(no/yes) Indicates samples who self-reported 'White British' and have very similar genetic ancestry based on a principal components analysis of the genotypes. See genotype QC documentation for details.
+used.in.pca.calculation		      (0/1)	(no/yes) Indicates samples which were used to compute principal components. All samples with genotype data were subsequently projected on to each of the 40 computed components. See genotype QC documentation for details.
+PC1-PC40			      numeric	Score for each principal component 1-40. See genotype QC documentation for details.
+in.Phasing.Input.chr1_22	      (0/1)	(no/yes) Indicates sample was in the input for phasing of chr1-chr22.
+in.Phasing.Input.chrX		      (0/1)	(no/yes) Indicates sample was in the input for phasing of chrX.
+in.Phasing.Input.chrXY		      (0/1)	(no/yes) Indicates sample was in the input for phasing of chrXY.
+
+
+Relatedness
+===========
+This file lists the pairs of individuals related up to the third degree in the data set. It is a plaintext file with space separated columns.
+
+ID1  	  string    sample_id for individual 1 in related pair.
+ID2  	  string    sample_id for individual 2 in related pair.
+HetHet	  numeric   Fraction of markers for which the pair both have a heterozygous genotype (output from KING software).
+IBS0	  numeric   Fraction of markers for which the pair shares zero alleles (output from KING software).
+Kinship   numeric   Estimate of the kinship coefficient for this pair based on the set of markers used in the kinship inference (output from KING software). The set of markers is indicated by the field: used.in.kinship.inference
+
+
+Imputation
+==========
+The imputed genotype calls are in BGEN v1.2 format (.bgen, .sample, .bgi) see http://www.well.ox.ac.uk/~gav/bgen_format/bgen_format_v1.2.html for details of the formats. The sample file lists the order of the samples in the .bgen files. The sample file includes the 'Sex' field for every sample (corresponding to 'Inferred.Gender' in the Sample-QC file). The list of variants in the files can be found with bgenix (https://bitbucket.org/gavinband/bgen/wiki/bgenix). The 1st column of the marker list file is 'alternate_ids' which is a unique identifier for each marker. For markers in the genotype data set 'alternate_ids' is the genotype marker id (rs_id in SNP-QC file). The second column is rsid or the reference panel marker_id, it is not guaranteed to be unique. The alleles in the imputation are aligned with REF/ALT, first_allele is the ref allele on the fwd strand. 
+
+
+Imputation MAF+info
+===================
+This file lists the minor allele frequency and info score for each of the markers in the imputed data, calculated using QCTOOL. The order of markers in these files is not guaranteed to be the same as the BGEN files.
+
+Alternate_id
+RS_id
+Position
+Allele1
+Allele2
+Minor Allele
+MAF
+Info score
+
+
+Haplotypes
+==========
+The phased haplotypes are in BGEN v1.2 format (.bgen, .sample, .bgi) see http://www.well.ox.ac.uk/~gav/bgen_format/bgen_format_v1.2.html for details of the formats. The sample file lists the order of the samples in the .bgen files.
+
+
+HLA imputation
+==============
+UK Biobank 500K HLA*IMP2 HLA Release
+
+One file with all loci: A, B, C, DRB5, DRB4, DRB3, DRB1, DQB1, DQA1, DPB1, DPA1.
+One line per individual.
+The samples are in the same order as the calls FAM file.
+Column 1:362 -> one column per possibly imputed allele.  Includes all 11 HLA loci, and all possible alleles for each locus available from HLA*IMP:02.  
+
+The column headers are the allele names.The first part (before the "_") is the locus name e.g. A = HLA-A, DRB1 = HLA-DRB1 etc.The second part (after the "_") is the two field (formerly known as 4-digit) allele name for the locus.  In this case if four digits are reported then the first two digits are the first field and the second two digits are the second field.  The four digits give the 4-digit allele name in old HLA nomenclature.  If three digits are reported, the first field is the first digit with a 0 to be added to the front, and the second field is the last two digits.  In 4-digit notation one adds a 0 at the start. 
+For example
+DRB1_403 = HLA-DRB1*04:03
+whereas
+DRB1_1101 = HLA-DRB1*11:01
+For more information on HLA nomenclature see http://hla.alleles.org/nomenclature/naming.html
+For HLA-DRB3, -DRB4, and -DRB5 the allele '9901' indicates that no allele is present (n.b. these loci can have copy number 0).
+
+For each locus there are two imputations, giving the HLA genotype.  Each has an associated probability.  Non-imputed alleles are assigned probability 0 (only the maximum posterior probability alleles and their associated probabilities are reported).  The imputed alleles are indicated by having a non-zero value in the relevant column for a given individual and locus: heterozygotes at a locus each have the maximum posterior probability from HLA*IMP:02 reported (Q2 in the HLA*IMP:02 output); homozygotes have the sum of these probabilities reported.
+
+
+Intensity
+=========
+These files contains the A,B intensity data measured by Affymetrix. The files are in a simple custom binary format.
+There are two intensity values A,B for each genotype, each represented as a 4-byte float. The set of A,B values for each marker are ordered consecutively by sample (analagous to a matrix with rows=SNPs and columns=Samples) e.g.
+SNP_1_SAMPLE_1_A SNP_1_SAMPLE_1_B SNP_1_SAMPLE_2_A  SNP_1_SAMPLE_2_B ... SNP_1_SAMPLE_N_A  SNP_1_SAMPLE_N_B SNP_2_SAMPLE_1_A SNP_2_SAMPLE_1_B ...
+Missing pairs of intensities are represented by -1 -1.
+The order of the markers and Samples are given by the BIM and FAM files with the calls.
+
+Affymetrix transform the A,B values into 'contrast' and 'strength' for their calling algorithm. If the intensity data is to be used for making cluster plots it is strongly suggested that the transformed values are plotted. The ellipses described by the snp-posterior data are only compatible with the transformed intensity values.
+contrast (X) = log2(A/B)
+strength (Y) =  log2(AB)/2
+Affymetrix called the genotypes in (106) batches of ~4,700 samples. To accurately examine the cluster plots, each batch should be plotted separately for a given marker. For chrX, males and females were called separately, so males and females should be plotted separately for chrX markers. 
+
+Evoker (https://github.com/wtsi-medical-genomics/evoker) can be used to plot cluster plots, following the recommendations above, for the UK Biobank data.
+
+
+Confidences
+===========
+These files contain the Affymetrix 'confidence' that a genotype belongs to the call cluster. This is a plaintext file with space spearated columns.
+Values are in the range 0-1 with 0 being most confident. Missing values are represented by -1. The order of markers and Samples are given by the BIM and FAM files.
+
+
+CNV
+===
+These files contain the B-Allele-Frequency (baf) and Log2Ratio (log2r) transformed intensitiy values for performing CNV calling. There is a separate file for baf and log2r per chromosome. These are plaintext files with space separated columns. The rows corresond to markers (ordered as the calls BIM file) and the columns correspond to samples (ordered as the calls FAM file)
+Missing values are represented by -1.
+
+
+SNP-posterior
+=============
+These files contain parameters used in Affymetrix's genotype calling algorithm, such as the posterior probability distributions (2-dimensional multivariate Normal) for intensities (in 'contrast' and 'strength' coordinates) of each genotype at each marker. See the Applied Biosystems Axiom Genotyping Solution Data Analysis Guide for more details (http://tools.thermofisher.com/content/sfs/manuals/axiom_genotyping_solution_analysis_guide.pdf).
+
+Affymetrix provide 33 parameters per marker per batch (3,498 per marker). Each parameter is represented by a 4-byte float. The set of values for each marker are ordered consecutively by batch. This is analagous to a matrix with rows=markers and columns=batch_parameters. The order of the markers and batches are given by the BIM and Batch files. 
+
+Diploid and haploid SNPs are called differently in Affymetrix' calling pipeline. On chrX females are diploid and males are haploid so we get two sets of parameters per SNP per batch. In the .bin snp-posterior chrX file, for each SNP the diploid and then the haploid snp-posteriors are given consecutively. The order of the SNPs is given in the BIM files, the haploid SNPs on chrX are appended with ':1' following Affymetrix' notation. The BIM files for chr1-22,Y,XY,MT are the same as for the calls files, but the chrX SNP-posterior BIM file has twice as many lines. 
+
+The 33 parameters are arranged in four groups. There are 7 parameters for each genotype cluster BB, AB, AA and a fourth set of 12 parameters (CV) from Affymetrix' pipeline which can be ignored for most analyses.
+
+The 7 parameters per genotype cluster are five parameters which define a 2-dimensional multivariate Normal distribution, and two counts of observations (NObsMean,NObsVar) in the order:
+mu_X
+sigma_X
+NObsMean
+NObsVar
+mu_Y
+sigma_Y
+cov
+
+Missing values are represented using the IEEE 754 NaN.
+
+
+File names
+==========
+Calls BED			ukb_cal_chrN_v2.bed
+Calls BIM			ukb_snp_chrN_v2.bim			
+Calls FAM			ukbA_cal_v2_sP.fam
+Marker-QC			ukb_snp_qc.txt
+Sample-QC			ukb_sqc_v2.txt
+Relatedness			ukbA_rel_sP.txt
+Imputation BGEN			ukb_imp_chrN_v3.bgen
+Imputation BGI			ukb_imp_chrN_v3.bgen.bgi
+Imputation MAF+info		ukb_mfi_chrN_v3.txt
+Imputation sample chr1-22	ukbA_imp_chrN_v3_sP.sample
+Imputation sample chrX		ukbA_imp_chrX_v3_sP.sample
+Imputation sample chrXY		ukbA_imp_chrXY_v3_sP.sample
+Haplotypes BGEN			ukb_hap_chrN_v2.bgen	
+Haplotypes BGI			ukb_hbg_chrN_v2.bgi
+HLA Imputation			ukb_hla_v2.txt
+Intensity			ukb_int_chrN_v2.bin
+Confidences			ukb_con_chrN_v2.txt
+CNV log2r			ukb_l2r_chrN_v2.txt
+CNV baf				ukb_baf_chrN_v2.txt
+SNP-posterior			ukb_snp_posterior_chrN.bin
+Batch				ukb_snp_posterior.batch
+SNP-posterior chrX BIM		ukb_snp_posterior_chrX_haploid.bim
+
+N: chromosome label (1..22,X,Y,XY,MT)
+P: number of consenting participants
+A: researchers UK Biobank application ID
