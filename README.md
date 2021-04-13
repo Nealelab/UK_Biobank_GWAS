@@ -1,5 +1,8 @@
 ### V3 Summary statistics are [now available for download on Amazon Web Services](https://docs.google.com/spreadsheets/d/1kvPoupSzsSFBNSztMzl04xMoSC3Kcx3CrjVf4yBmESU/edit?usp=sharing) 
 
+### [README](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas#readme) from the previous round of GWAS (n=337,199) [are available here](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas)
+
+
 # Table of Contents
 * [Updates](#updates) 
 * [Change Log](#change-log)
@@ -119,7 +122,8 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
     * INFO score > 0.8
     * MAF > 0.001
 	  * Exception: VEP annotated coding (PTV/Missense/Synonymous) MAF > 1e-6
-    * HWE p-value > 1e-10  
+    * HWE p-value > 1e-10
+          * Exception: VEP annotated coding w/MAF < 0.001   
 	* **QCed SNP count: 13.7 million** 
   * __imputed-v2 parameters__
     * Autosomes only
