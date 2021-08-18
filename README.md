@@ -29,8 +29,68 @@ Finally, the [0.1](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.1) 
 
 Updates to the Rapid GWAS summary statistics or download Manifest will be recorded here:
 
+ * _August, 2021_
+   * AUTHOR: Raymond Walters (with help from Sam Bryant and Daniel Howrigan, and hat tip to Trevor manz for discovering the issue)
+   * ISSUE: We recieved a couple reports that the round 2 biomarker GWAS results tsv were sorted in a different order than the rest of the round 2 (aka imputed-v3) gwas (alphabetically on variant instead of in genome order), meaning they don't correctly mesh with the variants.tsv.bgz file for rsids/info/consequence/etc., requiring a join instead of just pasting the columns together as our readme suggests. So the existing files aren't wrong, but they aren't as compatible as intended with the variant annotation file. A total of 186 GWAS results files, all coming from the [addition of biomarker phenotype sumstats](http://www.nealelab.is/blog/2019/9/16/biomarkers-gwas-results) were affected 
+   * SOLUTION: All 186 files have been re-ordered to match properly with the variants.tsv.bgz file. The updated files have "varorder" added to their filename. The earlier files are now removed from the manifest and public download, however we will keep a copy in-house for archive purposes if needed. Below is the list of phenotype ID prefixes that were adjusted, with 6 subsets for each phenotype (IRNT/RAW,male/female/both_sexes). 
+```
+30600
+30610
+30620
+30620
+30630
+30640
+30650
+30660
+30670
+30680
+30690
+30700
+30710
+30720
+30730
+30740
+30750
+30760
+30770
+30780
+30790
+30800
+30810
+30820
+30830
+30840
+30850
+30860
+30870
+30880
+30890
+30897
+```
+   * DETAILS: 
+
+These phenotypes were added to the list for round 2 late in the process, and were GWASed using Hail 0.2 instead of the Hail 0.1 pipeline used for the rest of the round 2 gwas. The code change from this switch Hail versions is responsible for the different sort order of the output files. Specifically, the tsv export scripts key/sort on "variant" in both pipelines, but the [Hail 0.2 version](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.2/export_results.biomarkers.py#L60) sorts on variant as a constructed string (sorting alphabetically) while the [Hail 0.1 version](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.1/23.export_results.py#L57) used the variant type which sorts by genomic location. (I'm pretty sure at the time Hail 0.2 hadn't implemented it's analogous locus type associated with genome build, though I haven't gone back to confirm.) The [script creating variants.tsv.bgz](https://github.com/Nealelab/UK_Biobank_GWAS/blob/master/0.1/24.create_variant_annotation_file.py) was part of the primary Hail 0.1 pipeline and so matches that location-based sort used by all of the GWAS outside of the biomarkers.
+
+As far as other releases based on the biomarkers, I haven't found any related issues. Specifically...
+
+Results files for the alternative version of the biomarker GWAS that added dilution fraction as a covariate would probably also be affected by this issue, but those weren't part of the public release (they were just discussed in [a blog post](http://www.nealelab.is/blog/2019/9/16/biomarkers-gwas-results)) and as far as I know aren't getting any other use.
+
+The ldsc-formatted results files ([linked from the h2 results site](https://nealelab.github.io/UKBB_ldsc/downloads.html)) are not affected by this issue. They were exported directly from the Hail GWAS results, and so did not involve re-matching with the variants.tsv.bgz in a way that could introduce issues from sort order. The ldsc format isn't sensitive to sort order, and the export scripts end up sorted on rsid the same for both the biomarkers and everything else anyway.
+
+Round 3 / pan-UKB analyses won't be affected by this issue since they're a separate pipeline unrelated to variants.tsv.bgz and without the separate handling of biomarkers.
+
+As far as I can find, the twitter bot hasn't tweeted any of the round 2 biomarker results. The [manifest of manhattan plots](https://docs.google.com/spreadsheets/d/1T_v3ECnmbxM9ejyDOBn4PA1n_2_fyXySUJn-RpNkpbs/edit#gid=0) that had been created from the UKB results that originally fed the bot doesn't have any of the biomarker phenotypes, so I'm guessing they were never in the bot's rotation.
+
+The results being displayed in CTG-View appear unaffected. For example the [results for albumin](https://view.genoma.io/gwas/5e937684f2e746647caa8962) have the expected variant locations as top hits and they are correctly matched to rsids (i.e. matching both the correctly aligned variants.tsv.bgz and canonical dbSNP entry for the locus).
+
+The [IEU Open GWAS Project](http://gwas.mrcieu.ac.uk/) similarly seems to have correct rsids etc in their phewas lookups, dataset summary, and reformatted vcf.
+
+Harder to confirm for other use the GWAS results have gotten/are getting, and of course should make people aware of the issue, but (fingers crossed) it looks like this hasn't caused widespread problems.	   
+
+
  * _January, 2021_
-   * We are currently experiencing issues with our DropBox account and working on a fix.  We appreciate your patience during this time  
+   * We are currently experiencing issues with our DropBox account and working on a fix.  We appreciate your patience during this time
+   * UPDATE: GWAS summary statistics are no longer available on Dropbox, and [now available for download on Amazon Web Services](https://docs.google.com/spreadsheets/d/1kvPoupSzsSFBNSztMzl04xMoSC3Kcx3CrjVf4yBmESU/edit?usp=sharing)   
 
 
  * _Oct 17th, 2019_
