@@ -32,40 +32,39 @@ Updates to the Rapid GWAS summary statistics or download Manifest will be record
  * _August, 2021_
    * AUTHOR: Raymond Walters (with help from Sam Bryant and Daniel Howrigan, and hat tip to Trevor manz for discovering the issue)
    * ISSUE: We recieved a couple reports that the round 2 biomarker GWAS results tsv were sorted in a different order than the rest of the round 2 (aka imputed-v3) gwas (alphabetically on variant instead of in genome order), meaning they don't correctly mesh with the variants.tsv.bgz file for rsids/info/consequence/etc., requiring a join instead of just pasting the columns together as our readme suggests. So the existing files aren't wrong, but they aren't as compatible as intended with the variant annotation file. A total of 186 GWAS results files, all coming from the [addition of biomarker phenotype sumstats](http://www.nealelab.is/blog/2019/9/16/biomarkers-gwas-results) were affected 
-   * SOLUTION: All 186 files have been re-ordered to match properly with the variants.tsv.bgz file. The updated files have "varorder" added to their filename. The earlier files are now removed from the manifest and public download, however we will keep a copy in-house for archive purposes if needed. Below is the list of phenotype ID prefixes that were adjusted, with 6 subsets for each phenotype (IRNT/RAW,male/female/both_sexes). 
+   * SOLUTION: All 186 files have been re-ordered to match properly with the variants.tsv.bgz file. The updated files have "varorder" added to their filename. The earlier files are now removed from the manifest and public download, however we will keep a copy in-house for archive purposes if needed. Below is the list of phenotype codes and description that were adjusted, with 6 subsets for each phenotype (IRNT/RAW,male/female/both_sexes). 
 ```
-30600
-30610
-30620
-30620
-30630
-30640
-30650
-30660
-30670
-30680
-30690
-30700
-30710
-30720
-30730
-30740
-30750
-30760
-30770
-30780
-30790
-30800
-30810
-30820
-30830
-30840
-30850
-30860
-30870
-30880
-30890
-30897
+30600 - Albumin (g/L)
+30610 - Alkaline phosphatase (U/L)
+30620 - Alanine aminotransferase (U/L)
+30630 - Apoliprotein A (g/L)
+30640 - Apoliprotein B (g/L)
+30650 - Aspartate aminotransferase (U/L)
+30660 - Direct bilirubin (umol/L)
+30670 - Urea (mmol/L)
+30680 - Calcium (mmol/L)
+30690 - Cholesterol (mmol/L)
+30700 - Creatinine (umol/L)
+30710 - C-reactive protein (mg/L)
+30720 - Cystatin C (mg/L)
+30730 - Gamma glutamyltransferase (U/L)
+30740 - Glucose (mmol/L)
+30750 - Glycated haemoglobin (mmol/mol)
+30760 - HDL cholesterol (mmol/L)
+30770 - IGF-1 (nmol/L)
+30780 - LDL direct (mmol/L)
+30790 - Lipoprotein A (nmol/L)
+30800 - Oestradiol (pmol/L)
+30810 - Phosphate (mmol/L)
+30820 - Rheumatoid factor (IU/ml)
+30830 - SHBG (nmol/L)
+30840 - Total bilirubin (umol/L)
+30850 - Testosterone (nmol/L)
+30860 - Total protein (g/L)
+30870 - Triglycerides (mmol/L)
+30880 - Urate (umol/L)
+30890 - Vitamin D (nmol/L)
+30897 - Estimated sample dilution factor (factor)
 ```
    * DETAILS: 
 
