@@ -2,6 +2,8 @@
 
 ### [README](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas#readme) from the previous round of GWAS (n=337,199) [are available here](https://github.com/Nealelab/UK_Biobank_GWAS/tree/master/imputed-v2-gwas)
 
+To cite this repo in its current form, and the summary statistics generated, please use this Zenodo release documentation
+[https://zenodo.org/record/8011558](https://zenodo.org/record/8011558)
 
 # Table of Contents
 * [Updates](#updates) 
